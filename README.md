@@ -31,10 +31,13 @@ On linux (and it probably works on Mac too) an example to get it on the SD card 
 Those settings are recommended by the RaspberryPi instructions.
 
 ## controlling your radio via web interface
-You can control your radio via web interface: try to open `http://radio.local` in a web browser. If that does not work then find its IP and in your browser enter `http://[IP of your radio]`.
+You can control your radio via web interface: try to open `http://radio.local` in a web browser. If that does not work then find its IP address and in your browser enter `http://[IP of your radio]`. There are several ways you can find the IP address of your radio: the command `nmap 192.168.1.0/24` can list the devices on your network (adapt the network address based on your computer's IP address, most probably the `1` could be another number). You will see a device named `radio.local` along with its IP address. Or you could also check your Internet router to get the list of connected devices and their corresponding IP addresses.
 
-
+## controlling your radio via ssh with a terminal interface
 If you prefer the command line, you can ssh into your radio (you need to set that up in the `config` file before building the image) and then use `ncmpcpp` to get a nice terminal interface (see some screenshots here: https://rybczak.net/ncmpcpp/screenshots/).
+
+## controlling your radio via an application
+You can use any `mpd` client you like (a non exhaustive list of applications for various platforms can be found here: https://www.musicpd.org/clients/). If you are asked for the port number, it's the default one, 6600. And for the IP address, it's the same thing as above for the web interface.
 
 ## ready-to-flash image
 Out of security concerns I recommend you read the [code](https://github.com/RPi-Distro/pi-gen/compare/master...pirateradiohack:master) and build the image yourself.

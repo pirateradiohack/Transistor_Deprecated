@@ -76,5 +76,16 @@ I tried to use an approach based on provisionning an image instead in order to m
 The first version of this project used the official scripts from Pimoroni. If you want that, you can find it here: https://github.com/pirateradiohack/PiRadio/tree/2019-05-25-PiRadio
 
 
+## Developers
+If you want to test the image locally, without the need to burn it to an SD card, you can use QEMU to emulate the hardware on your system and then create a virtual machine.
+- Make sure you have QEMU installed for the arm architecture, you can test with `qemu-system-arm --version`.
+- Set `USE_QEMU` to `"1"` or `true` in the config file and then build your image as usual.
+- Download the [Buster kernel](https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/kernel-qemu-4.19.50-buster) and the [Device Tree File](https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/versatile-pb.dtb) in the `deploy` directory.
+- Execute `qemu-system-arm -kernel kernel-qemu-4.19.50-buster -cpu arm1176 -m 256 -M versatilepb -dtb versatile-pb.dtb -no-reboot -serial stdio -net nic -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::2223-:80 -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" -hda name_of_your_image`
+
+That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
+This is of limited use since some python libraries won't run on devices other than a Raspberry Pi.
+
+
 Issues and pull requests are welcome.
 

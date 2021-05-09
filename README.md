@@ -84,7 +84,7 @@ If you want to test the image locally, without the need to burn it to an SD card
 - Execute `qemu-system-arm -kernel kernel-qemu-4.19.50-buster -cpu arm1176 -m 256 -M versatilepb -dtb versatile-pb.dtb -no-reboot -serial stdio -net nic -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::2223-:80 -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" -hda name_of_your_image`
 
 That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
-This is of limited use since some python libraries won't run on devices other than a Raspberry Pi.
+This is of limited use since some python libraries (ie: GPIO) won't run on devices other than a Raspberry Pi.
 
 
 Issues and pull requests are welcome.

@@ -10,7 +10,7 @@ Features are the ones provided by [mpd](https://github.com/MusicPlayerDaemon/MPD
 - physical buttons on the Phat Beat do what is expected of them
 - LEDs are used as a vumeter
 
-## how to create the image
+## How to create the image
 - First clone this repository with `git clone https://github.com/pirateradiohack/PiRadio.git`.  
 - Configure your wifi settings: copy the file called `config.example` to `config` and edit this last one. You will see where to enter your wifi name, password and country. All 3 settings are necessary. Your changes to this file will be kept in future updates.
 - Optionally configure your radio stations: If you create a file called `my-playlist.m3u` with your own list of internet radio streams, it will be installed.
@@ -18,7 +18,7 @@ If not, then you can always add stations in the web interface.
 - Then build the image. (You can see the whole guide on the official RaspberryPi repo: https://github.com/RPi-Distro/pi-gen). I find it easier to use docker (obviously you need to have docker installed on your system) as there is nothing else to install, just run one command from this directory: `./build-docker.sh`. That's it. On my computer it takes between 15 and 30 minutes. And at the end you should see something like: `Done! Your image(s) should be in deploy/`  
 If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.
 
-## burn the image to a SD card
+## Burn the image to a SD card
 You should find the newly created image in the `deploy` directory.
 
 ### graphically
@@ -30,13 +30,18 @@ On linux (and it probably works on Mac too) an example to get it on the SD card 
 (of course you need to replace `/dev/mmcblk0` with the path to your own SD card. You can find it with the command `lsblk -f`)
 Those settings are recommended by the RaspberryPi instructions.
 
-## controlling your radio via web interface
-You can control your radio via web interface: try to open `http://radio.local` in a web browser. If that does not work then find its IP and in your browser enter `http://[IP of your radio]`.
+## Controlling your radio
 
+### via web interface
+You can control your radio via web interface: try to open `http://radio.local` in a web browser. If that does not work then find its IP address and in your browser enter `http://[IP of your radio]`. There are several ways you can find the IP address of your radio: the command `nmap 192.168.1.0/24` can list the devices on your network (adapt the network address based on your computer's IP address, most probably the `1` could be another number). You will see a device named `radio.local` along with its IP address. Or you could also check your Internet router to get the list of connected devices and their corresponding IP addresses.
 
+### via ssh with a terminal interface
 If you prefer the command line, you can ssh into your radio (you need to set that up in the `config` file before building the image) and then use `ncmpcpp` to get a nice terminal interface (see some screenshots here: https://rybczak.net/ncmpcpp/screenshots/).
 
-## ready-to-flash image
+### via an application
+You can use any `mpd` client you like (a non exhaustive list of applications for various platforms can be found here: https://www.musicpd.org/clients/). If you are asked for the port number, it's the default one, 6600. And for the IP address, it's the same thing as above for the web interface.
+
+## Ready-to-flash image
 Out of security concerns I recommend you read the [code](https://github.com/RPi-Distro/pi-gen/compare/master...pirateradiohack:master) and build the image yourself.
 
 
@@ -57,11 +62,11 @@ With Linux you can use `kpartx` (from the `multipath-tools` package) to be able 
 You are safe to flash the image.
 - after flashing your operating system probably automounts the partitions.
 
-## how it is built
+## How it is built
 The image is built with the official RaspberryPi.org tool (https://github.com/RPi-Distro/pi-gen) to build a Raspbian lite system with all the software needed
 to have a working internet radio stream client. It uses `mpd`.
 
-## motivation
+## Motivation
 The official documentation from Pimoroni has some instructions and examples to make an internet streaming client for the hardware: https://github.com/pimoroni/phat-beat/tree/master/projects/vlc-radio. It works fine and is a good source of inspiration.
 
 
@@ -71,6 +76,17 @@ Also, the provided software in the examples works fine, but comes in a format th
 I tried to use an approach based on provisionning an image instead in order to make it a good ground for hacking.
 
 The first version of this project used the official scripts from Pimoroni. If you want that, you can find it here: https://github.com/pirateradiohack/PiRadio/tree/2019-05-25-PiRadio
+
+
+## Developers
+If you want to test the image locally, without the need to burn it to an SD card, you can use QEMU to emulate the hardware on your system and then create a virtual machine.
+- Make sure you have QEMU installed for the arm architecture, you can test with `qemu-system-arm --version`.
+- Set `USE_QEMU` to `"1"` or `true` in the config file and then build your image as usual.
+- Download the [Buster kernel](https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/kernel-qemu-4.19.50-buster) and the [Device Tree File](https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/versatile-pb.dtb) in the `deploy` directory.
+- Execute `qemu-system-arm -kernel kernel-qemu-4.19.50-buster -cpu arm1176 -m 256 -M versatilepb -dtb versatile-pb.dtb -no-reboot -serial stdio -net nic -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::2223-:80 -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" -hda name_of_your_image`
+
+That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
+This is of limited use since some python libraries (ie: GPIO) won't run on devices other than a Raspberry Pi.
 
 
 Issues and pull requests are welcome.

@@ -69,6 +69,8 @@ to have a working internet radio stream client. It uses `mpd`.
 I wanted to have a software that was easy to install on an embedded kit to make an Internet radio receiver.
 
 ## Developers
+The interesting bits happen in the `stage2/04-pirate-radio` directory. Where files can be added and then instructions can be set for the building tool to create the final OS image.
+
 If you want to test the image locally, without the need to burn it to an SD card, you can use QEMU to emulate the hardware on your system and then create a virtual machine.
 - Make sure you have QEMU installed for the arm architecture, you can test with `qemu-system-arm --version`.
 - Set `USE_QEMU` to `"1"` or `true` in the config file and then build your image as usual.

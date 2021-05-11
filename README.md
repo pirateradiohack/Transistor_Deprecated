@@ -1,14 +1,20 @@
-# Piradio [![Build Status](https://travis-ci.org/pirateradiohack/PiRadio.svg?branch=master)](https://travis-ci.org/pirateradiohack/PiRadio)
-Piradio powers a streaming internet radio client for the "Pirate Radio" hardware sold by Pimoroni: https://shop.pimoroni.com/products/pirate-radio-pi-zero-w-project-kit
-or any kit based on their Phat Beat DAC / Audio Amplifier and a Raspberry Pi.  
-It also work with the smaller shim audio amp: https://shop.pimoroni.com/products/audio-amp-shim-3w-mono-amp
+# PiRadio [![Build Status](https://travis-ci.org/pirateradiohack/PiRadio.svg?branch=master)](https://travis-ci.org/pirateradiohack/PiRadio)
+
+PiRadio is a receiver for web radios. It takes the form of an image to be burnt onto an SD card. The image comprises an operating system and all the necessary software to stream internet radios on an embedded platform.  
+
+The current hardware kit consists of the following:
+- A Raspberry Pi zero
+- A DAC / Audio Amplifier (tested with Phat Beat (discontinued) and [Audio Amp Shim](https://shop.pimoroni.com/products/audio-amp-shim-3w-mono-amp))
+- An On / Off switch ([OnOff Shim](https://shop.pimoroni.com/products/onoff-shim))
+- A power supply / battery charger ([Adafruit PowerBoost 1000C](https://shop.pimoroni.com/products/onoff-shim))
+- A LiPo battery
+- Physical buttons for the Raspberry Pi GPIO
 
 Features are the ones provided by [mpd](https://github.com/MusicPlayerDaemon/MPD):
-- it retains the radio station that was playing after turning off / on the device and also the volume.
-- it has a number of interfaces, currently on this image there is a web interface and a console one.
-- managing your radio stations can be done from the interface (`add stream` and delete buttons).
-- physical buttons on the Phat Beat do what is expected of them
-- LEDs are used as a vumeter
+- Takes a playlist of web radios
+- Manually add / remove radio streams from the web interface
+- Various interfaces to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
+- it restores automatically the radio station that was playing after turning off / on the device and also the volume.
 
 ## How to get the image
 

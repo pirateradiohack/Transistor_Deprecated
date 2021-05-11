@@ -21,7 +21,7 @@ If not, then you can always add stations in the web interface.
 If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.
 
 ### Ready-to-flash image
-For your convenience you will find the latest image pre-compiled here: [2020-07-28-Piradio-image.zip](https://github.com/pirateradiohack/PiRadio/releases/download/2020-07-28-PiRadio/image.zip).
+For your convenience you will find the latest image pre-built here: [2021-05-11-Piradio-image.zip](https://github.com/pirateradiohack/PiRadio/releases/download/2021-05-11-PiRadio/2021-05-11-Piradio.zip).
 
 
 Just flash it and configure your wifi. You can also optionally configure your own radio streams playlist.

@@ -20,10 +20,14 @@ if [ -f ../../my-playlist.m3u ]; then
 	install -v -m 644 ../../my-playlist.m3u				"${ROOTFS_DIR}/var/lib/mpd/playlists/my-playlist.m3u"
 fi
 
-# physical interface
+# physical interface (aka buttons)
 install -v -m 644 files/etc/systemd/system/radio-interface.service	"${ROOTFS_DIR}/etc/systemd/system/"
 mkdir "${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/interface.py					"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
+
+# shutdown daemon (to cut off power completely on shutdown)
+mkdir -p "${ROOTFS_DIR}/lib/systemd/system-shutdown/"
+install -v -m 755 files/lib/systemd/system-shutdown/gpio-poweroff	"${ROOTFS_DIR}/lib/systemd/system-shutdown/"
 
 # web interface
 install -v -m 644 files/etc/systemd/system/ympd.service			"${ROOTFS_DIR}/etc/systemd/system/"

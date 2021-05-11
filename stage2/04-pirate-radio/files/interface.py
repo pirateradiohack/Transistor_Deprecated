@@ -2,11 +2,11 @@
 physical interaction devices (buttons, LEDs...) and the software of the
 radio.
 """
-import subprocess
-import time
+from subprocess import run
 from contextlib import contextmanager
+from signal import pause
 
-import phatbeat
+from gpiozero import Button
 import systemd.daemon
 from mpd import MPDClient
 from mpd.base import CommandError
@@ -14,7 +14,24 @@ from mpd.base import CommandError
 HOST, PORT = 'localhost', 6600
 VOLUME_STEP = 10
 
+# Retain compatibility with phat-beat buttons
+PHATBEAT_BUTTON_FAST_FORWARD = 5
+PHATBEAT_BUTTON_REWIND = 13
+PHATBEAT_BUTTON_PLAY_PAUSE = 6
+PHATBEAT_BUTTON_VOLUME_UP = 16
+PHATBEAT_BUTTON_VOLUME_DOWN = 26
+PHATBEAT_BUTTON_ON_OFF = Button(12)
+
+# Set the pins to which buttons are connected
+BUTTON_FAST_FORWARD = Button(PHATBEAT_BUTTON_FAST_FORWARD)
+BUTTON_REWIND = Button(PHATBEAT_BUTTON_REWIND)
+BUTTON_PLAY_PAUSE = Button(PHATBEAT_BUTTON_PLAY_PAUSE)
+BUTTON_VOLUME_UP = Button(PHATBEAT_BUTTON_VOLUME_UP)
+BUTTON_VOLUME_DOWN = Button(PHATBEAT_BUTTON_VOLUME_DOWN)
+BUTTON_ON_OFF = Button(17)
+
 client = MPDClient()
+
 
 @contextmanager
 def connection_to_mpd():
@@ -29,6 +46,7 @@ def connection_to_mpd():
     finally:
         client.close()
         client.disconnect()
+
 
 # if the playlist is empty and an .m3u file has been provided then initialize
 with connection_to_mpd():
@@ -50,53 +68,62 @@ with connection_to_mpd():
 # systemd that we are ready to serve
 systemd.daemon.notify('READY=1')
 
-@phatbeat.on(phatbeat.BTN_VOLDN)
-def volume_down(pin):
+
+def volume_down():
     """Volume down button tells pulseaudio to step down the volume."""
     command = """pactl
                 set-sink-volume
                 0
                 -{}%
                 """.format(VOLUME_STEP)
-    subprocess.run(command.split())
+    run(command.split())
 
-@phatbeat.on(phatbeat.BTN_VOLUP)
-def volume_up(pin):
+
+def volume_up():
     """Volume up button tells pulseaudio to step up the volume."""
     command = """pactl
                 set-sink-volume
                 0
                 +{}%
                 """.format(VOLUME_STEP)
-    subprocess.run(command.split())
+    run(command.split())
 
-@phatbeat.on(phatbeat.BTN_PLAYPAUSE)
-def play_pause(pin):
+
+def play_pause():
     """Play/pause button tells MPD to toggle play/plause."""
     with connection_to_mpd():
         client.pause()
 
-@phatbeat.on(phatbeat.BTN_FASTFWD)
-def next(pin):
+
+def next_station():
     """Next button tells MPD to play next track."""
     with connection_to_mpd():
         client.next()
 
-@phatbeat.on(phatbeat.BTN_REWIND)
-def previous(pin):
+
+def previous_station():
     """Previous button tells MPD to play previous track."""
     with connection_to_mpd():
         client.previous()
 
-@phatbeat.on(phatbeat.BTN_ONOFF)
-def shutdown(pin):
+
+def shutdown():
     """Shutdown button tells the system to shutdown now."""
     command = """shutdown
                 -h now
                 """
-    subprocess.run(command.split())
+    run(command.split())
+
+
+# Define what actions to set for each button event
+BUTTON_FAST_FORWARD.when_pressed = next_station
+BUTTON_REWIND.when_pressed = previous_station
+BUTTON_PLAY_PAUSE.when_pressed = play_pause
+BUTTON_VOLUME_UP.when_pressed = volume_up
+BUTTON_VOLUME_DOWN.when_pressed = volume_down
+BUTTON_ON_OFF.when_pressed = shutdown
+PHATBEAT_BUTTON_ON_OFF.when_pressed = shutdown
 
 # maintain the module loaded for as long the the interface is needed
 # without conuming resources
-while True:
-    time.sleep(5)
+pause()

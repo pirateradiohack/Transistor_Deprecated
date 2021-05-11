@@ -66,16 +66,7 @@ The image is built with the official RaspberryPi.org tool (https://github.com/RP
 to have a working internet radio stream client. It uses `mpd`.
 
 ## Motivation
-The official documentation from Pimoroni has some instructions and examples to make an internet streaming client for the hardware: https://github.com/pimoroni/phat-beat/tree/master/projects/vlc-radio. It works fine and is a good source of inspiration.
-
-
-But those examples assume an already installed OS and run some scripts on top of it.
-I personally find it more convenient when it comes to embedded devices to just burn an image to an SD card.
-Also, the provided software in the examples works fine, but comes in a format that I find hard to tinker with.
-I tried to use an approach based on provisionning an image instead in order to make it a good ground for hacking.
-
-The first version of this project used the official scripts from Pimoroni. If you want that, you can find it here: https://github.com/pirateradiohack/PiRadio/tree/2019-05-25-PiRadio
-
+I wanted to have a software that was easy to install on an embedded kit to make an Internet radio receiver.
 
 ## Developers
 If you want to test the image locally, without the need to burn it to an SD card, you can use QEMU to emulate the hardware on your system and then create a virtual machine.

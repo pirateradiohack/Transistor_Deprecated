@@ -94,10 +94,13 @@ If you want to test the image locally, without the need to burn it to an SD card
 That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
 This is of limited use since some python libraries (ie: GPIO) won't run on devices other than a Raspberry Pi.
 
-This is the detailed usage of the pins (thanks to https://pinout.xyz):  
+## Pinout
+This is the detailed usage of the pins (thanks to https://pinout.xyz). This is mostly of interest when you want to connect the buttons.
+
 OOS stands for On Off Shim  
 PB stands for Phat Beat  
-AAS stands for Audio Amp Shim  
+AAS stands for Audio Amp Shim
+
 Since powers and grounds don't take names, here is their pinout:  
 - Power 1: PB / OOS
 - Power 2: PB / AAS / OOS

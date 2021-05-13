@@ -94,6 +94,24 @@ If you want to test the image locally, without the need to burn it to an SD card
 That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
 This is of limited use since some python libraries (ie: GPIO) won't run on devices other than a Raspberry Pi.
 
+This is the detailed usage of the pins (thanks to https://pinout.xyz):  
+OOS stands for On Off Shim  
+PB stands for Phat Beat  
+AAS stands for Audio Amp Shim  
+Since powers and grounds don't take names, here is their pinout:  
+- Power 1: PB / OOS
+- Power 2: PB / AAS / OOS
+- Ground 6: OOS
+- Ground 9: OOS
+- Ground 20: PB
+- Ground 25: PB / AAS
+- Ground 30: PB
+- Ground 34: PB
+- Ground 39: PB / AAS
+
+![Pinout](https://github.com/pirateradiohack/PiRadio/blob/master/Pinout.png)
+![Pinout Legend](https://github.com/pirateradiohack/PiRadio/blob/master/Legend-Pinout.png)
+
 
 Issues and pull requests are welcome.
 

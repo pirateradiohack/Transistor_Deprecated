@@ -33,7 +33,7 @@ For your convenience you will find the latest image pre-built here: [2021-05-11-
 Just flash it and configure your wifi. You can also optionally configure your own radio streams playlist.
 
 The files to edit are:
-- wifi: `/etc/wpa_supplicant/wpa_supplicant.conf` (edit this file)
+- wifi: `/etc/wpa_supplicant/wpa_supplicant.conf` (edit this file as root / sudo)
 - (optionally) playlist: `/home/pi/.config/vlc/playlist.m3u` (create this file)
 
 You can edit them before or after flashing the image:

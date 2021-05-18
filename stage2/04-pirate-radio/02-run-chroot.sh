@@ -20,6 +20,9 @@ adduser radio-interface gpio
 echo 'radio-interface ALL=(ALL) NOPASSWD: /sbin/shutdown' > /etc/sudoers.d/010_radio-interface-shutdown
 chmod 0440 /etc/sudoers.d/010_radio-interface-shutdown
 systemctl enable radio-interface
+# sound in python
+pip3 install --upgrade pip setuptools
+pip3 install simpleaudio
 
 # web interface
 cd /root/ympd

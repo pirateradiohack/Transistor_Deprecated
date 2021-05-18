@@ -8,11 +8,13 @@ autoconf
 automake
 libtool
 libasound2-dev
+python3-alsaaudio
 libfftw3-dev
 mpd
 mpc
 ncmpcpp
 python3-setuptools
+python3-pip
 python3-systemd
 cmake
 libmpdclient-dev

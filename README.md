@@ -10,11 +10,12 @@ The current hardware kit consists of the following:
 - A LiPo battery
 - Physical buttons for the Raspberry Pi GPIO
 
-Features are the ones provided by [mpd](https://github.com/MusicPlayerDaemon/MPD):
+Features:
 - Takes a playlist of web radios
 - Manually add / remove radio streams from the web interface
 - Various interfaces to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
-- it restores automatically the radio station that was playing after turning off / on the device and also the volume.
+- Automatically restores the radio station that was playing and volume level after turning off / on.
+- Sleep timer: hold the on off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to push 20 minutes. You can still simply press the on off button to immediately turn off the radio.
 
 ## How to get the image
 
@@ -27,7 +28,7 @@ If not, then you can always add stations in the web interface.
 If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.
 
 ### Ready-to-flash image
-For your convenience you will find the latest image pre-built here: [2021-05-11-Piradio-image.zip](https://github.com/pirateradiohack/PiRadio/releases/download/2021-05-11-PiRadio/2021-05-11-Piradio.zip).
+For your convenience you will find the latest image pre-built here: [2021-05-18-Piradio-image.zip](https://github.com/pirateradiohack/PiRadio/releases/download/2021-05-18-PiRadio/image_2021-05-18-Piradio-lite.zip).
 
 
 Just flash it and configure your wifi. You can also optionally configure your own radio streams playlist.

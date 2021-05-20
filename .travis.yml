@@ -1,4 +1,4 @@
-language: bash
+language: shell
 services:
   - docker
 before_script:
@@ -7,14 +7,12 @@ script:
   - "./build-docker.sh"
 deploy:
   provider: releases
+  api_key:
+    secure: "LCOtqXO4zazwRbtYxqFkxataB7nH68bPX9w4oKzHkZ1uHy2NIjCdLGREGfzcRClg035Lwk/7oUyyWianDfZzriOijBjwj4B4xsYZAKuPz07GOmF6akoe7ejMY47OqI3j3WP9Bl5lQ58T3uIfAkvphrqSI2j8Wdf0QV6KZx5Pz/xayOSCaCal//UvrDhzIzoQ71l/EanW2aS1Sp2SlHe1A3uvahHUS78vOgDMaf+rpHibvh4d/3XsGCHxHtuzQNqrIq7lqnc5vMJzVjQ6rgLSUYH4Ec31JUhJOgCO1YHl2VVs+OmeOYIiyQWkGkinttx6wpC0o+NPqqm1AtgUvqIlmTTiqkimQ7uRpwO2tNt9swMfh5qVcJ5P2Jom8mftpi0tHZrS/xP0mYdYutYag/AGnbrEvlY1DQYejeFB/VMxXwOTGC0nQ1WvUO4AwmBaiZKSJq11xpyuzN/DjQvRZKWQYScBpIVZP0J4k1HjV0fgyAG1SAW2Vtb2ID5tuqwxN6PMbHRhwhZIlyu2I4DuZfKKZVDlum/68Kt2dOX5NkUAGnSm+qj6s19PPaij/fjbTJ7hvPP+eZiK/cC1vSvDuUWkrM6jNgpaOslGQKZ8n1KAuFB5do6yqvINT43ZNndAVb8xwkrWM+8u4OJWcq+4FIlaUvfQYQegbei+of1l2zujCqo="
   edge: true # opt in to dpl v2
   on:
     all_branches: true
     tags: true
-  token: "${GH_TOKEN}"
-  file: 'deploy/image_`date +"%Y-%m-%d"`-Piradio-lite.zip'
   cleanup: true
   draft: true
-env:
-  global:
-    secure: R0Xx6tY58asubqWMPVzWkmGAVSxsXom79PpcQO5JMsiHF5g2r15slUOnR+DbJy+mVB20drCTplqGGLLrGhsPbaBaOaHoggHI3W2VD1GjL/hsLdQtyikVcAyTMTzhbcPx93oMT2eScDgIFy54og4DSlErYDhY32afB3sZOmiFyCZMkiY/Qp1tYNqMPEa0sCeogea/j5Xtf5I6r7ocn5o5YacpNUubEx6OFHwuHLYL4Fl+At3+zT0Wh03BSrarj5r/h6ZEfYsnIDuDFJv4e1LbLJFWSQAMPkWdaa/5ANyC8+HQg+zeb8vmi+QPrz731aquhcTciHmwrbeVCWAgPdIwq2o44GjX7ImHAYAQTy8D2DK68bq+flHqv4Qvrsz1Ioth98+W6QSSTaMgCW3KZFxbQf3jT508WXz1q/mhwJ1O78M9yHHBzfrh/gKH6Z/m8Szg/bUnEFUpSPu8hUCPZo/JnNQniZ89rt5y1GUh/RHvEQIVL9IO+GpC+HAlfCHuHMPmjwwPcAxCZHg4aFO6+pNh95DHAkwWZsLkbkdjZgZHLoFPxxb9RP55VLNhzK7vswLcnH5oFhXuFy+jcUQKU8Ncl1N1eBwFtQ5ttyoO8MqeTRXDi6twZNz9Y+Lf6B40nEmJPd1wru9H7pRpQgOryTijRZxnlD6r39FYxvQC1UatoXg=
+  file: 'deploy/image_`date +"%Y-%m-%d"`-Piradio-lite.zip'

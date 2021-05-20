@@ -7,11 +7,12 @@ script:
   - "./build-docker.sh"
 deploy:
   provider: releases
+  edge: true # opt in to dpl v2
   on:
     all_branches: true
     tags: true
   api_key: "${GH_TOKEN}"
-  file: 'deploy/`date +"%Y-%m-%d"`-Piradio-lite.img'
+  file: 'deploy/image_`date +"%Y-%m-%d"`-Piradio-lite.zip'
   skip_cleanup: true
   draft: true
 env:

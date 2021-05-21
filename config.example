@@ -1,5 +1,5 @@
 # set the image name
-IMG_NAME="Piradio"
+IMG_NAME="Transistor"
 
 # set to 1 to zip the image
 DEPLOY_ZIP="1"

@@ -19,34 +19,34 @@ Features:
 
 ## How to get the image
 
+### Ready-to-write image
+For your convenience you will find the latest image pre-built. Access it from the [releases](https://github.com/pirateradiohack/PiRadio/releases) page. Download and unzip the latest image, it's the zip file called "image" with a date. (It is built automatically from the source code by Travis-ci.)
+
+All you need to do is to configure your wifi on the image. You can also optionally configure your radio streams playlist.
+
+The files to edit are:
+- wifi: `/etc/wpa_supplicant/wpa_supplicant.conf` (edit this file as root / sudo)
+- (optionally) playlist: `/home/pi/.config/vlc/playlist.m3u` (create this file)
+
+You can edit the files *before* or *after* writing the image to the sd card:
+- before: you can mount the `.img`.  
+With a modern operating system you probably just have to click the .img.  
+With Linux you can use `kpartx` (from the `multipath-tools` package) to be able to mount the partition directly: `sudo kpartx -a path/to/2019-05-23-Piradio-lite.img` followed by `sudo mount /dev/mapper/loop0p2 tmp/ -o loop,rw`  
+(you will need to create the mount directory first and check what loop device you are using with `sudo kpartx -l path/to/2019-05-23-Piradio-lite.img`). Then you can edit the files mentionned above. And `sudo umount tmp`.  
+You are safe to flash the image.
+- after: your operating system probably automounts the partitions.
+
 ### building from source
 - First clone this repository with `git clone https://github.com/pirateradiohack/PiRadio.git`.  
 - Configure your wifi settings: copy the file called `config.example` to `config` and edit this last one. You will see where to enter your wifi name, password and country. All 3 settings are necessary. Your changes to this file will be kept in future updates.
 - Optionally configure your radio stations: If you create a file called `my-playlist.m3u` with your own list of internet radio streams, it will be installed.
 If not, then you can always add stations in the web interface.
 - Then build the image. (You can see the whole guide on the official RaspberryPi repo: https://github.com/RPi-Distro/pi-gen). I find it easier to use docker (obviously you need to have docker installed on your system) as there is nothing else to install, just run one command from this directory: `./build-docker.sh`. That's it. On my computer it takes between 15 and 30 minutes. And at the end you should see something like: `Done! Your image(s) should be in deploy/`  
-If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.
+If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.  
+- You should find the newly created image in the `deploy` directory.
 
-### Ready-to-flash image
-For your convenience you will find the latest image pre-built here: [2021-05-18-Piradio-image.zip](https://github.com/pirateradiohack/PiRadio/releases/download/2021-05-18-PiRadio/image_2021-05-18-Piradio-lite.zip).
-
-
-Just flash it and configure your wifi. You can also optionally configure your own radio streams playlist.
-
-The files to edit are:
-- wifi: `/etc/wpa_supplicant/wpa_supplicant.conf` (edit this file as root / sudo)
-- (optionally) playlist: `/home/pi/.config/vlc/playlist.m3u` (create this file)
-
-You can edit them before or after flashing the image:
-- before flashing you can mount the `.img`.  
-With a modern operating system you probably just have to click the .img.  
-With Linux you can use `kpartx` (from the `multipath-tools` package) to be able to mount the partition directly: `sudo kpartx -a path/to/2019-05-23-Piradio-lite.img` followed by `sudo mount /dev/mapper/loop0p2 tmp/ -o loop,rw`  
-(you will need to create the mount directory first and check what loop device you are using with `sudo kpartx -l path/to/2019-05-23-Piradio-lite.img`). Then you can edit the files mentionned above. And `sudo umount tmp`.  
-You are safe to flash the image.
-- after flashing your operating system probably automounts the partitions.
-
-## Burn the image to a SD card
-You should find the newly created image in the `deploy` directory.
+## Write the image to a SD card
+Now that you have your image file, you need to write it to a SD card in order to put it in the Raspberry Pi. Choose you favorite method below and once you have your SD card ready you can boot your Raspberry Pi, the first boot can take a minute or two, and then your radio is ready to go.
 
 ### graphically
 For a user friendly experience you can try [etcher](https://www.balena.io/etcher/) to flash the image to the SD card.
@@ -93,7 +93,6 @@ If you want to test the image locally, without the need to burn it to an SD card
 - Execute `qemu-system-arm -kernel kernel-qemu-4.19.50-buster -cpu arm1176 -m 256 -M versatilepb -dtb versatile-pb.dtb -no-reboot -serial stdio -net nic -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::2223-:80 -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" -hda name_of_your_image`
 
 That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
-This is of limited use since some python libraries (ie: GPIO) won't run on devices other than a Raspberry Pi.
 
 ## Pinout
 This is the detailed usage of the pins (thanks to https://pinout.xyz). This is mostly of interest when you want to connect the buttons.

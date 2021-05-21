@@ -1,4 +1,4 @@
-# Transistor [![Build Status](https://travis-ci.org/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.org/pirateradiohack/Transistor)
+# Transistor [![Build Status](https://travis-ci.org/pirateradiohack/PiRadio.svg?branch=master)](https://travis-ci.org/pirateradiohack/PiRadio)
 
 Transistor is a receiver for web radios. It takes the form of an image to be burnt onto an SD card. The image comprises an operating system and all the necessary software to stream internet radios on an embedded platform.  
 

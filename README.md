@@ -1,6 +1,6 @@
-# PiRadio [![Build Status](https://travis-ci.org/pirateradiohack/PiRadio.svg?branch=master)](https://travis-ci.org/pirateradiohack/PiRadio)
+# Transistor [![Build Status](https://travis-ci.org/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.org/pirateradiohack/Transistor)
 
-PiRadio is a receiver for web radios. It takes the form of an image to be burnt onto an SD card. The image comprises an operating system and all the necessary software to stream internet radios on an embedded platform.  
+Transistor is a receiver for web radios. It takes the form of an image to be burnt onto an SD card. The image comprises an operating system and all the necessary software to stream internet radios on an embedded platform.  
 
 The current hardware kit consists of the following:
 - A Raspberry Pi zero
@@ -20,7 +20,7 @@ Features:
 ## How to get the image
 
 ### Ready-to-write image
-For your convenience you will find the latest image pre-built. Access it from the [releases](https://github.com/pirateradiohack/PiRadio/releases) page. Download and unzip the latest image, it's the zip file called "image" with a date. (It is built automatically from the source code by Travis-ci.)
+For your convenience you will find the latest image pre-built. Access it from the [releases](https://github.com/pirateradiohack/Transistor/releases) page. Download and unzip the latest image, it's the zip file called "image" with a date. (It is built automatically from the source code by Travis-ci.)
 
 All you need to do is to configure your wifi on the image. You can also optionally configure your radio streams playlist.
 
@@ -31,13 +31,13 @@ The files to edit are:
 You can edit the files *before* or *after* writing the image to the sd card:
 - before: you can mount the `.img`.  
 With a modern operating system you probably just have to click the .img.  
-With Linux you can use `kpartx` (from the `multipath-tools` package) to be able to mount the partition directly: `sudo kpartx -a path/to/2019-05-23-Piradio-lite.img` followed by `sudo mount /dev/mapper/loop0p2 tmp/ -o loop,rw`  
-(you will need to create the mount directory first and check what loop device you are using with `sudo kpartx -l path/to/2019-05-23-Piradio-lite.img`). Then you can edit the files mentionned above. And `sudo umount tmp`.  
+With Linux you can use `kpartx` (from the `multipath-tools` package) to be able to mount the partition directly: `sudo kpartx -a path/to/2019-05-23-Transistor-lite.img` followed by `sudo mount /dev/mapper/loop0p2 tmp/ -o loop,rw`  
+(you will need to create the mount directory first and check what loop device you are using with `sudo kpartx -l path/to/2019-05-23-Transistor-lite.img`). Then you can edit the files mentionned above. And `sudo umount tmp`.  
 You are safe to flash the image.
 - after: your operating system probably automounts the partitions.
 
 ### building from source
-- First clone this repository with `git clone https://github.com/pirateradiohack/PiRadio.git`.  
+- First clone this repository with `git clone https://github.com/pirateradiohack/Transistor.git`.  
 - Configure your wifi settings: copy the file called `config.example` to `config` and edit this last one. You will see where to enter your wifi name, password and country. All 3 settings are necessary. Your changes to this file will be kept in future updates.
 - Optionally configure your radio stations: If you create a file called `my-playlist.m3u` with your own list of internet radio streams, it will be installed.
 If not, then you can always add stations in the web interface.

@@ -14,7 +14,6 @@ deploy:
   on:
     all_branches: true
     tags: true
-  draft: true
   file: deploy/image_`date +"%Y-%m-%d"`-Piradio-lite.zip
 env:
   global:

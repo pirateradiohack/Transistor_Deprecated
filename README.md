@@ -13,6 +13,7 @@ The current hardware kit consists of the following:
 Features:
 - Takes a playlist of web radios
 - Manually add / remove radio streams from the web interface
+- Play your audio files by uploading them to `/home/transistor/music/` via `scp`
 - Various interfaces to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
 - Automatically restores the radio station that was playing and volume level after turning off / on.
 - Sleep timer: hold the on off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to push 20 minutes. You can still simply press the on off button to immediately turn off the radio.

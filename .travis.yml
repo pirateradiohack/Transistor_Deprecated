@@ -14,7 +14,7 @@ deploy:
   on:
     all_branches: true
     tags: true
-  file: deploy/image_`date +"%Y-%m-%d"`-Piradio-lite.zip
+  file: deploy/image_`date +"%Y-%m-%d"`-Transistor-lite.zip
 env:
   global:
   - secure: i+FXYnykjOSIR8pF1lnjjykUu4EoLnCUmq3A8rAv33G1uhF3yI+CCpglXgZacV7/sz6l2h56ydy9TQEk1Iijve067zo/FRRxD5wkP0DCZxAUb1ZPBNf2L80fCK7hK4f0t1JwTQ4DEerjN6CQ2hH9793ir62bXZXY+YxUsx/HYTyP3OA1ObFtqk3pQLOl6V764L7qLbRAdoWmD6bjHW1XT2XbURivQebIHHcRhy1ycwPKVCqI+XYUEr2R9OnMqZJ6oVVChQPpiqtZKUfHXabbJc7D8FL/0pFtVU1wRvBeK/t1E0if2WLp8sH+fbkOCyze+yBy2P/fpAKsWhzk/48xVQFicGmE0Y+s8XoexSSkr7OQAQjiVzfoN/C8Y2inB0gDiE9ws7cqi0zscHlz6FauCEYAy7lMqWDa/RkRkzsZ2oNn1w06WIdDmU62qW/W3GYxELtaJF6PTljThCh2jQEQq3OxmDSqCagaD1amAZ4qSxYDN3wPnub7TgxaMazQqbIukIUKJ4mZ07C+FSvicau97frOZGAKoGSv9t4mDSP/NCO9zFLFAkyZQ52YMSVaBfQ8F/2nbTDLvQ9xT/vGC7KRW9ZLaUIOlI9XmjmaEhfZLqYfnlOQNKPOB7Y7f4MiVSc4/HkcDyT56yWlK86oM1UnZzMVtrGxWGSaCNPyxDTTp7k=

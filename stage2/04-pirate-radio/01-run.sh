@@ -15,6 +15,7 @@ install -v -m 644 "${ROOTFS_DIR}/root/pivumeter/dependencies/etc/asound.conf"		"
 
 # mpd
 mkdir "${ROOTFS_DIR}/home/transistor/music/"
+chown transistor:transistor "${ROOTFS_DIR}/home/transistor/music/"
 git clone https://github.com/Mic92/python-mpd2.git			"${ROOTFS_DIR}/root/python-mpd2"
 install -v -m 644 files/etc/mpd.conf					"${ROOTFS_DIR}/etc/"
 if [ -f ../../my-playlist.m3u ]; then

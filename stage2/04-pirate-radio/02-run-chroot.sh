@@ -11,6 +11,8 @@ autoconf && automake --add-missing
 make install
 
 # mpd
+mkdir /home/transistor/music/
+chown transistor:transistor /home/transistor/music/
 cd /root/python-mpd2
 python3 setup.py install
 

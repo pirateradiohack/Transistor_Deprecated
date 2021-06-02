@@ -34,3 +34,9 @@ cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/usr
 make
 make install
 systemctl enable ympd
+
+# bluetooth
+bluetoothctl -- power on
+bluetoothctl -- discoverable on
+bluetoothctl -- pairable on
+systemctl enable bt-agent

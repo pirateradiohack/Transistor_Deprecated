@@ -4,6 +4,8 @@ python3-rpi.gpio
 python3-gpiozero
 wiringpi
 pulseaudio
+pulseaudio-module-bluetooth
+bluez-tools
 autoconf
 automake
 libtool

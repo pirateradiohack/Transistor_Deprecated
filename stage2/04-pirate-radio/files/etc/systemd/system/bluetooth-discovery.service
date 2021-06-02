@@ -1,0 +1,11 @@
+[Unit]
+Description=Bluetooth Device Discovery
+After=bluetooth.service
+PartOf=bluetooth.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bt-discovery
+
+[Install]
+WantedBy=bluetooth.target

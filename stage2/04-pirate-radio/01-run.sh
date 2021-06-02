@@ -33,3 +33,9 @@ install -v -m 755 files/lib/systemd/system-shutdown/gpio-poweroff	"${ROOTFS_DIR}
 # web interface
 install -v -m 644 files/etc/systemd/system/ympd.service			"${ROOTFS_DIR}/etc/systemd/system/"
 git clone https://github.com/notandy/ympd.git				"${ROOTFS_DIR}/root/ympd"
+
+# bluetooth
+install -v -m 644 files/etc/bluetooth/main.conf				"${ROOTFS_DIR}/etc/bluetooth/"
+install -v -m 644 files/etc/systemd/system/bt-agent.service		"${ROOTFS_DIR}/etc/systemd/system/"
+install -v -m 644 files/etc/systemd/system/bluetooth-discovery.service	"${ROOTFS_DIR}/etc/systemd/system/"
+install -v -m 755 files/usr/local/sbin/bt-discovery			"${ROOTFS_DIR}/usr/local/sbin/"

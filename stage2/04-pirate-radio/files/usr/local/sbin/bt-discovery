@@ -1,0 +1,4 @@
+#! /bin/sh
+bluetoothctl -- power on
+bluetoothctl -- discoverable on
+bluetoothctl -- pairable on

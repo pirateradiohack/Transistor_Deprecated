@@ -1,4 +1,4 @@
-# Transistor [![Build Status](https://travis-ci.org/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.org/pirateradiohack/Transistor)
+# Transistor [![Build Status](https://api.travis-ci.com/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.com/github/pirateradiohack/Transistor)
 
 Transistor is a receiver for web radios. It takes the form of an image to be burnt onto an SD card. The image comprises an operating system and all the necessary software to stream internet radios on an embedded platform.  
 
@@ -8,6 +8,7 @@ The current hardware kit consists of the following:
 - An On / Off switch ([OnOff Shim](https://shop.pimoroni.com/products/onoff-shim))
 - A power supply / battery charger ([Adafruit PowerBoost 1000C](https://shop.pimoroni.com/products/onoff-shim))
 - A LiPo battery
+- A Raspio Analog Zero (optional, if you want to plug a potentiometer for the volume setting)
 - Physical buttons for the Raspberry Pi GPIO
 
 Features:
@@ -95,27 +96,31 @@ If you want to test the image locally, without the need to burn it to an SD card
 
 That should boot the image. You can then `ssh` into it on `localhost` on port 2222, and use port 80 on `localhost` port 2223.
 
-## Pinout
+## Hardware
 This is the detailed usage of the pins (thanks to https://pinout.xyz). This is mostly of interest when you want to connect the buttons.
 
 OOS stands for On Off Shim  
 PB stands for Phat Beat  
 AAS stands for Audio Amp Shim
+AZ stands for Raspio Analog Zero
 
 Since powers and grounds don't take names, here is their pinout:  
-- Power 1: PB / OOS
+- Power 1: PB / OOS / AZ
 - Power 2: PB / AAS / OOS
-- Ground 6: OOS
-- Ground 9: OOS
-- Ground 20: PB
-- Ground 25: PB / AAS
-- Ground 30: PB
-- Ground 34: PB
-- Ground 39: PB / AAS
+- Ground 6: OOS / AZ
+- Ground 9: OOS / AZ
+- Ground 14: AZ
+- Ground 20: PB / AZ
+- Ground 25: PB / AAS / AZ
+- Ground 30: PB / AZ
+- Ground 34: PB / AZ
+- Ground 39: PB / AAS / AZ
 
 ![Pinout](https://github.com/pirateradiohack/PiRadio/blob/master/Pinout.png)
 ![Pinout Legend](https://github.com/pirateradiohack/PiRadio/blob/master/Legend-Pinout.png)
 
+The first channel of the Raspio Analog Zero (channel 0) is expecting to receive a potentiometer to set the sound volume:
+plug the ends of the potentiometer to 3.3v and ground, then plug the wiper (usually found in the middle of the three tabs) into the first channel of the Analog Zero.
 
+## Contribution
 Issues and pull requests are welcome.
-

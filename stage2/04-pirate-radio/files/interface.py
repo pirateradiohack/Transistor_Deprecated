@@ -2,14 +2,16 @@
 physical interaction devices (buttons, LEDs...) and the software of the
 radio.
 """
+import asyncio
 from contextlib import contextmanager
 from signal import pause
 from subprocess import run
 
 import alsaaudio
+import pulsectl
 import simpleaudio as sa
 import systemd.daemon
-from gpiozero import Button
+from gpiozero import MCP3008, Button
 from mpd import MPDClient
 from mpd.base import CommandError
 
@@ -23,6 +25,8 @@ PHATBEAT_BUTTON_PLAY_PAUSE = 6
 PHATBEAT_BUTTON_VOLUME_UP = 16
 PHATBEAT_BUTTON_VOLUME_DOWN = 26
 PHATBEAT_BUTTON_ON_OFF = Button(12)
+
+POTENTIOMETER_VOLUME = MCP3008(0)
 
 SLEEP_TIMER_SOUND = "/usr/local/lib/radio-interface/sleep-timer.wav"
 
@@ -151,6 +155,23 @@ def shutdown(button):
     button.was_held = False
 
 
+async def volume():
+    """
+    Set the volume according to the potentiometer.
+    Gpiozero returns a float from 0 to 1 from the potentiometer.
+    It can be fed directly into pulse audio, 1 being the maximum
+    volume (above 1 is the soft boost).
+    """
+    # Create a client for Pulse Audio
+    pulse = pulsectl.Pulse("volume")
+    # Choose the sink we want to set the volume to
+    sink = pulse.sink_list()[0]
+    while True:
+        volume = POTENTIOMETER_VOLUME.value
+        pulse.volume_set_all_chans(sink, volume)
+        await asyncio.sleep(0.1)
+
+
 # Set the pins to which buttons are connected
 BUTTON_FAST_FORWARD = Button(PHATBEAT_BUTTON_FAST_FORWARD)
 BUTTON_REWIND = Button(PHATBEAT_BUTTON_REWIND)
@@ -168,6 +189,9 @@ BUTTON_VOLUME_DOWN.when_pressed = volume_down
 BUTTON_ON_OFF.when_held = sleep_timer
 BUTTON_ON_OFF.when_released = shutdown
 PHATBEAT_BUTTON_ON_OFF.when_pressed = shutdown
+
+# set pulseaudio volume to POTENTIOMETER_VOLUME.value
+asyncio.run(volume())
 
 # maintain the module loaded for as long the the interface is needed
 # without conuming resources

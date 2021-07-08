@@ -166,9 +166,13 @@ async def volume():
     pulse = pulsectl.Pulse("volume")
     # Choose the sink we want to set the volume to
     sink = pulse.sink_list()[0]
+    volume = 0.1
     while True:
-        volume = POTENTIOMETER_VOLUME.value
-        pulse.volume_set_all_chans(sink, volume)
+        # Make sure the potentiometer only set the volume when it is moved
+        # not at rest
+        if abs(POTENTIOMETER_VOLUME.value - volume) > 0.01:
+            volume = POTENTIOMETER_VOLUME.value
+            pulse.volume_set_all_chans(sink, volume)
         await asyncio.sleep(0.1)
 
 

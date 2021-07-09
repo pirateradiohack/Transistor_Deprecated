@@ -6,6 +6,7 @@ wiringpi
 pulseaudio
 pulseaudio-module-bluetooth
 bluez-tools
+python-dbus
 autoconf
 automake
 libtool

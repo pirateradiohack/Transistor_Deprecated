@@ -36,6 +36,8 @@ git clone https://github.com/notandy/ympd.git				"${ROOTFS_DIR}/root/ympd"
 
 # bluetooth
 install -v -m 644 files/etc/bluetooth/main.conf				"${ROOTFS_DIR}/etc/bluetooth/"
-install -v -m 644 files/etc/systemd/system/bt-agent.service		"${ROOTFS_DIR}/etc/systemd/system/"
+install -v -m 644 files/etc/systemd/system/bluetooth-agent.service	"${ROOTFS_DIR}/etc/systemd/system/"
+install -v -m 644 files/usr/local/sbin/bluetooth-agent/bluezutils.py	"${ROOTFS_DIR}/usr/local/sbin/bluetooth-agent/"
+install -v -m 755 files/usr/local/sbin/bluetooth-agent/simple-agent	"${ROOTFS_DIR}/usr/local/sbin/bluetooth-agent/"
 install -v -m 644 files/etc/systemd/system/bluetooth-discovery.service	"${ROOTFS_DIR}/etc/systemd/system/"
 install -v -m 755 files/usr/local/sbin/bt-discovery			"${ROOTFS_DIR}/usr/local/sbin/"

@@ -40,5 +40,5 @@ make install
 systemctl enable ympd
 
 # bluetooth
-systemctl enable bt-agent
+systemctl enable bluetooth-agent
 systemctl enable bluetooth-discovery

@@ -15,8 +15,8 @@ autoconf && automake --add-missing
 make install
 
 # mpd
-mkdir /home/transistor/music/
-chown transistor:transistor /home/transistor/music/
+mkdir -p /home/transistor/audio_library/{music,podcasts}
+chown -R transistor:transistor /home/transistor/audio_library/
 cd /root/python-mpd2
 python3 setup.py install
 
@@ -42,3 +42,8 @@ systemctl enable ympd
 # bluetooth
 systemctl enable bluetooth-agent
 systemctl enable bluetooth-discovery
+
+# podcasts
+pip3 install poca
+chown transistor:crontab /var/spool/cron/crontabs/transistor
+chown -R transistor:transistor /home/transistor/.poca/

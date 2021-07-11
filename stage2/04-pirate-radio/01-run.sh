@@ -42,3 +42,9 @@ install -v -m 644 files/usr/local/sbin/bluetooth-agent/bluezutils.py	"${ROOTFS_D
 install -v -m 755 files/usr/local/sbin/bluetooth-agent/simple-agent	"${ROOTFS_DIR}/usr/local/sbin/bluetooth-agent/"
 install -v -m 644 files/etc/systemd/system/bluetooth-discovery.service	"${ROOTFS_DIR}/etc/systemd/system/"
 install -v -m 755 files/usr/local/sbin/bt-discovery			"${ROOTFS_DIR}/usr/local/sbin/"
+
+# poca
+mkdir "${ROOTFS_DIR}/home/transistor/.poca/"
+install -v -m 644 files/poca.xml					"${ROOTFS_DIR}/home/transistor/.poca/"
+install -v -m 600 files/var/spool/cron/crontabs/transistor		"${ROOTFS_DIR}/var/spool/cron/crontabs/"
+chown transistor:crontab /var/spool/cron/crontabs/transistor

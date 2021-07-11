@@ -22,3 +22,4 @@ python3-systemd
 cmake
 libmpdclient-dev
 libssl-dev
+libxslt-dev

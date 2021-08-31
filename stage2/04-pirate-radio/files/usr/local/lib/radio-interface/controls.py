@@ -3,7 +3,6 @@ import asyncio
 from contextlib import contextmanager
 from subprocess import run
 
-import alsaaudio
 import pulsectl
 import simpleaudio as sa
 from gpiozero import MCP3008, Button
@@ -88,7 +87,7 @@ class Controls:
             await asyncio.sleep(0.1)
 
     def play_pause(self) -> None:
-        """Play/pause button tells MPD to toggle play/plause."""
+        """Play/pause button tells MPD to toggle play/pause."""
         with self.connection_to_mpd():
             self.mpd.pause()
 

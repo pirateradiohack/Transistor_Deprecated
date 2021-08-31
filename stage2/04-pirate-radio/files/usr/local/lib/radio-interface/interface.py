@@ -16,7 +16,7 @@ with controls.connection_to_mpd():
     if not controls.mpd.playlist():
         try:
             controls.mpd.load("my-playlist")
-        except (CommandError):
+        except CommandError:
             pass
 
 # Make sure the client is playing and in repeat mode on startup

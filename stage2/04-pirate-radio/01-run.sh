@@ -25,6 +25,7 @@ install -v -m 644 files/etc/systemd/system/radio-interface.service	"${ROOTFS_DIR
 mkdir "${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/interface.py					"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/controls.py					"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
+install -v -m 644 files/usr/local/lib/radio-interface/helpers.py					"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/sleep-timer.wav 					"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 
 # shutdown daemon (to cut off power completely on shutdown)

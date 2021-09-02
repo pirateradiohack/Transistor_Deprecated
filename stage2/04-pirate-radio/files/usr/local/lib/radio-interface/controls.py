@@ -4,12 +4,12 @@ from contextlib import contextmanager
 from subprocess import run
 
 import pulsectl
-import simpleaudio as sa
 from gpiozero import MCP3008, Button
 from mpd import MPDClient
 
+from helpers import notify
+
 VOLUME_STEP = 0.1
-SLEEP_TIMER_SOUND = "/usr/local/lib/radio-interface/sleep-timer.wav"
 HOST, PORT = "localhost", 6600
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 # use the trick described here:
@@ -101,6 +101,7 @@ class Controls:
         with self.connection_to_mpd():
             self.mpd.previous()
 
+    @notify
     def sleep_timer(self, button) -> None:
         """Shutdown button tells the system to shutdown 20 minutes from now."""
         self.button_was_held = True
@@ -113,16 +114,6 @@ class Controls:
                    minutes.
                    """
         run(command.split())
-        self._notify()
-
-    def _notify(self) -> None:
-        """
-        Play a sound to inform the user that the long button press is
-        registered.
-        """
-        sleep_timer_sound = sa.WaveObject.from_wave_file(SLEEP_TIMER_SOUND)
-        notification = sleep_timer_sound.play()
-        notification.wait_done()
 
     def shutdown(self, button) -> None:
         """Shutdown button tells the system to shutdown now."""

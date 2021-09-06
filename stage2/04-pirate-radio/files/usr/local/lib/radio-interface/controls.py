@@ -9,7 +9,7 @@ from mpd import MPDClient
 
 from helpers import notify
 
-VOLUME_STEP = 0.1
+VOLUME_STEP = 0.05
 HOST, PORT = "localhost", 6600
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 # use the trick described here:

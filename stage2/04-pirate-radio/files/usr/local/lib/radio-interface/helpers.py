@@ -15,7 +15,7 @@ def notify(function):
     def wrapper(*args, **kwargs):
         sleep_timer_sound = sa.WaveObject.from_wave_file(SLEEP_TIMER_SOUND)
         notification = sleep_timer_sound.play()
+        return function(*args, **kwargs)
         notification.wait_done()
-        function(*args, **kwargs)
 
     return wrapper

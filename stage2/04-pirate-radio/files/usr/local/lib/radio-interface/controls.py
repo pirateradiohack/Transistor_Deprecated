@@ -12,10 +12,6 @@ from helpers import notify
 VOLUME_STEP = 0.05
 HOST, PORT = "localhost", 6600
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
-# use the trick described here:
-# https://gpiozero.readthedocs.io/en/stable/faq.html
-# #how-do-i-use-button-when-pressed-and-button-when-held-together
-Button.was_held = False
 
 
 class Controls:
@@ -102,8 +98,11 @@ class Controls:
             self.mpd.previous()
 
     @notify
-    def sleep_timer(self, button) -> None:
+    def sleep_timer(self) -> None:
         """Shutdown button tells the system to shutdown 20 minutes from now."""
+        # use the trick described here:
+        # https://gpiozero.readthedocs.io/en/stable/faq.html
+        # #how-do-i-use-button-when-pressed-and-button-when-held-together
         self.button_was_held = True
         command = """shutdown
                    -h +20

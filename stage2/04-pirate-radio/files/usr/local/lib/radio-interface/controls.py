@@ -17,18 +17,18 @@ POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 class Controls:
     """Implements the various controls needed in an audio device.
 
-    mpd client, pulse client and potentiometer_volume are class variable
+    mpd client  and potentiometer_volume are class variable
     because these resources are better to be shared by all instances of
     the Controls class. (Even though a typical use case won't require
     more than 1 instance of the class.)
     """
 
     mpd = MPDClient()
-    pulse_client = pulsectl.Pulse("volume")
     potentiometer_volume = MCP3008(0)
 
     def __init__(self) -> None:
         self.button_was_held: bool = False
+        self.pulse_client = pulsectl.Pulse("radio-interface")
         self.pulse_sink = self.pulse_client.sink_list()[0]
 
     @contextmanager
@@ -45,13 +45,38 @@ class Controls:
             self.mpd.close()
             self.mpd.disconnect()
 
+    @contextmanager
+    def connection_to_pulseaudio(self):
+        """Context manager to establish a connection with Pulse Audio.
+
+        Should be used each time getting the volume is necessary since the
+        client is not synchronized when the volume is changed on another
+        client.
+        That is necessary for instance when changing the volume as the current
+        volume is needed in order to apply a change.
+        """
+        try:
+            self.pulse_client = pulsectl.Pulse("radio-interface")
+            self.pulse_sink = self.pulse_client.sink_list()[0]
+            yield
+        finally:
+            self.pulse_client.close()
+
     def volume_down(self) -> None:
         """Volume down button tells pulseaudio to step down the volume."""
-        self.pulse_client.volume_change_all_chans(self.pulse_sink, -VOLUME_STEP)
+        with self.connection_to_pulseaudio():
+            self.pulse_client.volume_change_all_chans(
+                self.pulse_sink,
+                -VOLUME_STEP
+            )
 
     def volume_up(self) -> None:
         """Volume up button tells pulseaudio to step up the volume."""
-        self.pulse_client.volume_change_all_chans(self.pulse_sink, +VOLUME_STEP)
+        with self.connection_to_pulseaudio():
+            self.pulse_client.volume_change_all_chans(
+                self.pulse_sink,
+                +VOLUME_STEP
+            )
 
     async def volume_knob(self) -> None:
         """

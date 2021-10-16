@@ -60,21 +60,21 @@ On linux (and it probably works on Mac too) an example to get it on the SD card 
 (of course you need to replace `/dev/mmcblk0` with the path to your own SD card. You can find it with the command `lsblk -f`)
 Those settings are recommended by the RaspberryPi instructions.
 
-## Controlling your radio
+## Controlling your Transistor
 
-The radio is equipped with the necessary buttons to turn it on / off, control the volume up and down, and select the next and previous radio stations. Besides that, you can control it remotely, on the network.
+Transistor is equipped with the necessary buttons to turn it on / off, control the volume up and down, and select the next and previous radio stations. Besides that, you can control it remotely, on the network.
 
-The radio connects to the wifi network that was set in the config file. It should receive an IP address from the Internet router. You need to find this IP address in order to control the radio. There are several ways you can do that:
+Transistor connects to the wifi network that was set in the config file. It should receive an IP address from the Internet router. You need to find this IP address in order to control the Transistor. There are several ways you can do that:
 
-- For convinience, the radio sets its own local domain. Some devices are compatible with this (Android supposedly works, but iOS does not. Linux should be fine if avahi is installed). So you can try to reach the radio at the address `radio.local`.
-- The command `nmap 192.168.1.0/24` can list the devices on your network (adapt the network address based on your computer's IP address, most probably the `1` could be another number). You will see a device named `radio.local` along with its IP address.
+- For convinience, Transistor sets its own local domain. Some devices are compatible with this (Android supposedly works, but iOS does not. Linux should be fine if avahi is installed). So you can try to reach your Transistor at the address `transistor.local`.
+- The command `nmap 192.168.1.0/24` can list the devices on your network (adapt the network address based on your computer's IP address, most probably the `1` could be another number). You will see a device named `transistor.local` along with its IP address.
 - Or you could also check your Internet router to get the list of connected devices and their corresponding IP addresses.
 
 ### via web interface
-You can control your radio via web interface: try to open `http://radio.local` (or the IP address) in a web browser.
+You can control your radio via web interface: try to open `http://transistor.local` (or the IP address) in a web browser.
 
 ### via ssh with a terminal interface
-If you prefer the command line, you can ssh into your radio and then use `ncmpcpp` to get a nice terminal interface (see some screenshots here: https://rybczak.net/ncmpcpp/screenshots/).
+If you prefer the command line, you can ssh into Transistor and then use `ncmpcpp` to get a nice terminal interface (see some screenshots here: https://rybczak.net/ncmpcpp/screenshots/).
 
 ### via an application
 You can use any `mpd` client you like (a non exhaustive list of applications for various platforms can be found here: https://www.musicpd.org/clients/). If you are asked for the port number, it's the default one, 6600. And for the IP address, it's the same thing as above.

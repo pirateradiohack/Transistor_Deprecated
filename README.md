@@ -4,7 +4,7 @@ Transistor is a receiver for web radios. It takes the form of an image to be bur
 
 The current hardware kit consists of the following:
 - A Raspberry Pi zero
-- A DAC / Audio Amplifier (tested with Phat Beat (discontinued) and [Audio Amp Shim](https://shop.pimoroni.com/products/audio-amp-shim-3w-mono-amp))
+- A DAC / Audio Amplifier (tested with Phat Beat (not sold anymore) and [Audio Amp Shim](https://shop.pimoroni.com/products/audio-amp-shim-3w-mono-amp))
 - An On / Off switch ([OnOff Shim](https://shop.pimoroni.com/products/onoff-shim))
 - A power supply / battery charger ([Adafruit PowerBoost 1000C](https://shop.pimoroni.com/products/onoff-shim))
 - A LiPo battery

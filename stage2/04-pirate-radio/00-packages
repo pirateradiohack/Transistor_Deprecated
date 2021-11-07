@@ -16,6 +16,8 @@ libfftw3-dev
 mpd
 mpc
 ncmpcpp
+python3-flask
+python3-flask-cors
 python3-setuptools
 python3-pip
 python3-systemd

@@ -1,0 +1,15 @@
+[Unit]
+Description=radio-browser.info service interface
+After=network.target
+
+[Service]
+Environment=FLASK_APP=/usr/local/lib/radio-browser/radio-browser
+ExecStart=/usr/bin/flask run --host=0.0.0.0
+# Disable Python's buffering of STDOUT and STDERR, so that output from the
+# service shows up immediately in systemd's logs
+Environment=PYTHONUNBUFFERED=1
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=default.target

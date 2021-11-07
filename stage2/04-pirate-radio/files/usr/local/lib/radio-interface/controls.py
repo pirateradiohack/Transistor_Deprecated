@@ -39,6 +39,8 @@ class Controls:
         sketchy.
         """
         try:
+            self.mpd.timeout = 10
+            self.mpd.idletimeout = None
             self.mpd.connect(HOST, PORT)
             yield
         finally:

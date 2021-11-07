@@ -1,6 +1,8 @@
 deploy/*
 work/*
 config
+config.mine
+stage2/04-pirate-radio/files/usr/local/lib/radio-browser/.mypy_cache/
 postrun.sh
 SKIP
 SKIP_IMAGES

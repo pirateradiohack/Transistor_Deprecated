@@ -39,6 +39,9 @@ make
 make install
 systemctl enable ympd
 
+pip3 install pyradios
+systemctl enable radio-browser
+
 # bluetooth
 systemctl enable bluetooth-agent
 systemctl enable bluetooth-discovery

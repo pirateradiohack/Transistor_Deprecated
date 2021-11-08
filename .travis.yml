@@ -2,6 +2,12 @@ language: shell
 services:
 - docker
 before_script:
+- |
+  if ! git describe --exact-match --tags HEAD &> /dev/null
+  then
+    echo "Not a tagged release, not deploying."
+    exit
+  fi
 - cp config.example config
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:

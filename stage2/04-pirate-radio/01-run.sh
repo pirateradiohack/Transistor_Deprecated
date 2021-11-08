@@ -10,7 +10,7 @@ install -v -m 644 files/etc/pulse/client.conf				"${ROOTFS_DIR}/etc/pulse/"
 install -v -m 644 files/etc/pulse/default.pa				"${ROOTFS_DIR}/etc/pulse/"
 
 # pivumeter
-git clone https://github.com/pimoroni/pivumeter.git			"${ROOTFS_DIR}/root/pivumeter"
+git clone https://github.com/pirateradiohack/pivumeter.git		"${ROOTFS_DIR}/root/pivumeter"
 install -v -m 644 "${ROOTFS_DIR}/root/pivumeter/dependencies/etc/asound.conf"		"${ROOTFS_DIR}/etc/"
 
 # mpd

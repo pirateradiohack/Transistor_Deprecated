@@ -13,9 +13,9 @@ The current hardware kit consists of the following:
 
 Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)
-- Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`
+- Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`. They will appear in your media library.
 - **Bluetooth speaker** (connect to the device called Transistor)
-- Play your **podcasts** (connect via `ssh` and use the command `poca-subscribe add` to add a new podcast subscription. They are updated every hour, use the command `poca` to update them manually.)
+- Play your **podcasts** (connect via `ssh` and use the command `poca-subscribe add` to add a new podcast subscription. You will see your podcasts appear in your media library. They are updated every hour, use the command `poca` to update them manually.)
 - **Various interfaces** to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
 - Automatically restores the radio station that was playing and volume level after turning off / on.
 - **Sleep timer**: hold the on off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to add another 20 minutes. You can still simply press the on/off button to immediately turn off the radio.

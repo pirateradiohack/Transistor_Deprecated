@@ -42,6 +42,7 @@ rewind_button = Button(phatbeat_rewind_gpio)
 play_pause_button = Button(phatbeat_play_pause_gpio)
 volume_up_button = Button(phatbeat_volume_up_gpio)
 volume_down_button = Button(phatbeat_volume_down_gpio)
+volume_down_button_pirate_audio = Button(24)
 on_off_button = Button(17)
 
 # Define what actions to set for each button event
@@ -50,6 +51,7 @@ rewind_button.when_pressed = controls.previous
 play_pause_button.when_pressed = controls.play_pause
 volume_up_button.when_pressed = controls.volume_up
 volume_down_button.when_pressed = controls.volume_down
+volume_down_button_pirate_audio.when_pressed = controls.volume_down
 on_off_button.when_held = controls.sleep_timer
 on_off_button.when_released = controls.shutdown
 phatbeat_on_off_button.when_held = controls.sleep_timer

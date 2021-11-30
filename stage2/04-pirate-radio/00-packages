@@ -2,6 +2,7 @@ raspi-gpio
 python-rpi.gpio
 python3-rpi.gpio
 python3-gpiozero
+python-spidev
 wiringpi
 pulseaudio
 pulseaudio-module-bluetooth
@@ -19,9 +20,12 @@ ncmpcpp
 python3-flask
 python3-flask-cors
 python3-setuptools
+python-pip
 python3-pip
 python3-systemd
 cmake
 libmpdclient-dev
 libssl-dev
 libxslt-dev
+python3-pil
+python3-numpy

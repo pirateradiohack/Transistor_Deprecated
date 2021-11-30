@@ -1,82 +1,36 @@
 """The class that implements the controls for the audio device."""
 import asyncio
-from contextlib import contextmanager
 from subprocess import run
 
-import pulsectl
 from gpiozero import MCP3008, Button
-from mpd import MPDClient
 
-from helpers import notify
+from helpers import notify, connection_to_mpd, connection_to_pulseaudio
 
 VOLUME_STEP = 0.05
-HOST, PORT = "localhost", 6600
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 
 
 class Controls:
     """Implements the various controls needed in an audio device.
-
-    mpd client  and potentiometer_volume are class variable
-    because these resources are better to be shared by all instances of
-    the Controls class. (Even though a typical use case won't require
-    more than 1 instance of the class.)
     """
-
-    mpd = MPDClient()
-    potentiometer_volume = MCP3008(0)
 
     def __init__(self) -> None:
         self.button_was_held: bool = False
-        self.pulse_client = pulsectl.Pulse("radio-interface")
-        self.pulse_sink = self.pulse_client.sink_list()[0]
-
-    @contextmanager
-    def connection_to_mpd(self):
-        """Context manager to establish the connection with MPD.
-
-        Should be used for every use of the client since the connection is
-        sketchy.
-        """
-        try:
-            self.mpd.timeout = 10
-            self.mpd.idletimeout = None
-            self.mpd.connect(HOST, PORT)
-            yield
-        finally:
-            self.mpd.close()
-            self.mpd.disconnect()
-
-    @contextmanager
-    def connection_to_pulseaudio(self):
-        """Context manager to establish a connection with Pulse Audio.
-
-        Should be used each time getting the volume is necessary since the
-        client is not synchronized when the volume is changed on another
-        client.
-        That is necessary for instance when changing the volume as the current
-        volume is needed in order to apply a change.
-        """
-        try:
-            self.pulse_client = pulsectl.Pulse("radio-interface")
-            self.pulse_sink = self.pulse_client.sink_list()[0]
-            yield
-        finally:
-            self.pulse_client.close()
+        self.potentiometer_volume = MCP3008(0)
 
     def volume_down(self) -> None:
         """Volume down button tells pulseaudio to step down the volume."""
-        with self.connection_to_pulseaudio():
-            self.pulse_client.volume_change_all_chans(
-                self.pulse_sink,
+        with connection_to_pulseaudio() as pulse:
+            pulse["client"].volume_change_all_chans(
+                pulse["sink"],
                 -VOLUME_STEP
             )
 
     def volume_up(self) -> None:
         """Volume up button tells pulseaudio to step up the volume."""
-        with self.connection_to_pulseaudio():
-            self.pulse_client.volume_change_all_chans(
-                self.pulse_sink,
+        with connection_to_pulseaudio() as pulse:
+            pulse["client"].volume_change_all_chans(
+                pulse["sink"],
                 +VOLUME_STEP
             )
 
@@ -100,29 +54,63 @@ class Controls:
         """
         comparison_point = self.potentiometer_volume.value
         while True:
-            if (
+            knob_movement = (
                 abs(self.potentiometer_volume.value - comparison_point)
                 > POTENTIOMETER_THRESHOLD_TRIGGER
-            ):
+            )
+            if knob_movement:
                 volume = self.potentiometer_volume.value
-                self.pulse_client.volume_set_all_chans(self.pulse_sink, volume)
+                with connection_to_pulseaudio() as pulse:
+                    pulse["client"].volume_set_all_chans(pulse["sink"], volume)
             comparison_point = self.potentiometer_volume.value
             await asyncio.sleep(0.1)
 
+    def play(self) -> None:
+        """Play the audio."""
+        with connection_to_mpd() as mpd:
+            mpd.play()
+
+    def repeat(self, state: bool) -> None:
+        """Select repeat mode for the playlist.
+
+        Options for state are:
+        - True
+        - False
+        """
+        if state:
+            state = 1
+        else:
+            state = 0
+        with connection_to_mpd() as mpd:
+            mpd.repeat(state)
+
     def play_pause(self) -> None:
-        """Play/pause button tells MPD to toggle play/pause."""
-        with self.connection_to_mpd():
-            self.mpd.pause()
+        """Toggle play/pause."""
+        with connection_to_mpd() as mpd:
+            mpd.pause()
 
     def next(self) -> None:
-        """Next button tells MPD to play next track."""
-        with self.connection_to_mpd():
-            self.mpd.next()
+        """Play next track."""
+        with connection_to_mpd() as mpd:
+            mpd.next()
 
     def previous(self) -> None:
-        """Previous button tells MPD to play previous track."""
-        with self.connection_to_mpd():
-            self.mpd.previous()
+        """Play previous track."""
+        with connection_to_mpd() as mpd:
+            mpd.previous()
+
+    def playing(self, content: str) -> str:
+        """Fetch the currently playing content.
+
+        Available content is:
+        - name
+        - album
+        - artist
+        - title
+        """
+        with connection_to_mpd() as mpd:
+            playing = mpd.currentsong()
+        return playing.get(content)
 
     @notify
     def sleep_timer(self) -> None:
@@ -144,8 +132,8 @@ class Controls:
     def shutdown(self, button) -> None:
         """Shutdown button tells the system to shutdown now."""
         if not self.button_was_held:
-            with self.connection_to_mpd():
-                self.mpd.stop()
+            with connection_to_mpd() as mpd:
+                mpd.stop()
             command = """shutdown
                     -h now
                     """

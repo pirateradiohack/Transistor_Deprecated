@@ -43,9 +43,12 @@
 #arm_freq=800
 
 # Uncomment some or all of these to enable the optional hardware interfaces
-#dtparam=i2c_arm=on
-#dtparam=i2s=on
+dtparam=i2c_arm=on
+dtparam=i2s=on
 dtparam=spi=on
+
+# pirate audio 3w amp DAC enable
+gpio=25=op,dh
 
 # Uncomment this to enable infrared communication.
 #dtoverlay=gpio-ir,gpio_pin=17

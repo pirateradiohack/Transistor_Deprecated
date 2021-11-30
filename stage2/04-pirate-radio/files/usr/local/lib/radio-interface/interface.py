@@ -6,43 +6,28 @@ import asyncio
 from signal import pause
 
 import systemd.daemon
-from controls import Controls
 from gpiozero import Button
-from mpd.base import CommandError
+
+from controls import Controls
+from display import Display
 
 controls = Controls()
-# if the playlist is empty and an .m3u file has been provided then initialize
-with controls.connection_to_mpd():
-    if not controls.mpd.playlist():
-        try:
-            controls.mpd.load("my-playlist")
-        except CommandError:
-            pass
+display = Display()
 
 # Make sure the client is playing and in repeat mode on startup
-with controls.connection_to_mpd():
-    controls.mpd.play()
-    controls.mpd.repeat(1)
+controls.play()
+controls.repeat(True)
 
 # all initialization is considered done after this point and we tell
 # systemd that we are ready to serve
 systemd.daemon.notify("READY=1")
 
-# Retain compatibility with phat-beat buttons
-phatbeat_fast_forward_gpio = 5
-phatbeat_rewind_gpio = 13
-phatbeat_play_pause_gpio = 6
-phatbeat_volume_up_gpio = 16
-phatbeat_volume_down_gpio = 26
-phatbeat_on_off_button = Button(12)
-
-# Create the buttons by assigning their corresponding GPIOs
-fast_forward_button = Button(phatbeat_fast_forward_gpio)
-rewind_button = Button(phatbeat_rewind_gpio)
-play_pause_button = Button(phatbeat_play_pause_gpio)
-volume_up_button = Button(phatbeat_volume_up_gpio)
-volume_down_button = Button(phatbeat_volume_down_gpio)
-volume_down_button_pirate_audio = Button(24)
+# Assign the buttons to their corresponding GPIOs
+fast_forward_button = Button(5)
+rewind_button = Button(13)
+play_pause_button = Button(6)
+volume_up_button = Button(16)
+volume_down_button = Button(24)
 on_off_button = Button(17)
 
 # Define what actions to set for each button event
@@ -51,14 +36,18 @@ rewind_button.when_pressed = controls.previous
 play_pause_button.when_pressed = controls.play_pause
 volume_up_button.when_pressed = controls.volume_up
 volume_down_button.when_pressed = controls.volume_down
-volume_down_button_pirate_audio.when_pressed = controls.volume_down
 on_off_button.when_held = controls.sleep_timer
 on_off_button.when_released = controls.shutdown
-phatbeat_on_off_button.when_held = controls.sleep_timer
-phatbeat_on_off_button.when_released = controls.shutdown
 
-# sync the volume with the potentiometer value
-asyncio.run(controls.volume_knob())
+
+async def main():
+    await asyncio.gather(
+        controls.volume_knob(),
+        display.metadata_display()
+    )
+
+
+asyncio.run(main())
 
 # maintain the module loaded for as long the the interface is needed
 # without consuming resources

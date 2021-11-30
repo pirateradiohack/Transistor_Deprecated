@@ -7,13 +7,6 @@ systemctl enable pulseaudio
 pip3 install --upgrade pip setuptools
 pip3 install pulsectl
 
-#pivumeter
-cd /root/pivumeter
-aclocal && libtoolize
-autoconf && automake --add-missing
-./configure && make
-make install
-
 # mpd
 mkdir -p /home/transistor/audio_library/{music,podcasts}
 chown -R transistor:transistor /home/transistor/audio_library/
@@ -39,6 +32,10 @@ make
 make install
 systemctl enable ympd
 
+# pirate audio screen
+pip3 install st7789
+
+# Radio browser
 pip3 install pyradios
 systemctl enable radio-browser
 

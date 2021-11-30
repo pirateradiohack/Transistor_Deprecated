@@ -9,10 +9,6 @@ install -v -m 644 files/etc/systemd/system/pulseaudio.service		"${ROOTFS_DIR}/et
 install -v -m 644 files/etc/pulse/client.conf				"${ROOTFS_DIR}/etc/pulse/"
 install -v -m 644 files/etc/pulse/default.pa				"${ROOTFS_DIR}/etc/pulse/"
 
-# pivumeter
-git clone https://github.com/pirateradiohack/pivumeter.git		"${ROOTFS_DIR}/root/pivumeter"
-install -v -m 644 "${ROOTFS_DIR}/root/pivumeter/dependencies/etc/asound.conf"		"${ROOTFS_DIR}/etc/"
-
 # mpd
 git clone https://github.com/Mic92/python-mpd2.git			"${ROOTFS_DIR}/root/python-mpd2"
 install -v -m 644 files/etc/mpd.conf					"${ROOTFS_DIR}/etc/"
@@ -25,6 +21,7 @@ install -v -m 644 files/etc/systemd/system/radio-interface.service	"${ROOTFS_DIR
 mkdir "${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/interface.py	"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/controls.py	"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
+install -v -m 644 files/usr/local/lib/radio-interface/display.py	"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/helpers.py	"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 install -v -m 644 files/usr/local/lib/radio-interface/sleep-timer.wav 	"${ROOTFS_DIR}/usr/local/lib/radio-interface/"
 
@@ -36,6 +33,7 @@ install -v -m 755 files/lib/systemd/system-shutdown/gpio-poweroff	"${ROOTFS_DIR}
 install -v -m 644 files/etc/systemd/system/ympd.service			"${ROOTFS_DIR}/etc/systemd/system/"
 git clone https://github.com/pirateradiohack/ympd.git			"${ROOTFS_DIR}/root/ympd"
 
+# radio browser service
 mkdir "${ROOTFS_DIR}/usr/local/lib/radio-browser/"
 install -v -m 644 files/usr/local/lib/radio-browser/radio-browser.py 	"${ROOTFS_DIR}/usr/local/lib/radio-browser/"
 install -v -m 644 files/etc/systemd/system/radio-browser.service 	"${ROOTFS_DIR}/etc/systemd/system/"

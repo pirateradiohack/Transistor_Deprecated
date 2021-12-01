@@ -25,12 +25,10 @@ def notify(function):
     return wrapper
 
 
-mpd = MPDClient()
-
-
 @contextmanager
 def connection_to_mpd():
     """Context manager to establish the connection with MPD."""
+    mpd = MPDClient()
     try:
         mpd.timeout = 10
         mpd.idletimeout = None

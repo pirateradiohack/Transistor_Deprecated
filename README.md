@@ -127,25 +127,24 @@ That should boot the image. You can then `ssh` into it on `localhost` on port 22
 ## Hardware
 This is the detailed usage of the pins (thanks to https://pinout.xyz). This is mostly of interest when you want to connect the buttons.
 
-OOS stands for On Off Shim  
-PB stands for Phat Beat  
-AAS stands for Audio Amp Shim
-AZ stands for Raspio Analog Zero
+OOS: On Off Shim  
+AZ: Raspio Analog Zero  
+PA: Pirate Audio Amp + LCD
 
-Since powers and grounds don't take names, here is their pinout:  
-- Power 1: PB / OOS / AZ
-- Power 2: PB / AAS / OOS
-- Ground 6: OOS / AZ
-- Ground 9: OOS / AZ
+Powers and grounds don't appear in the picture, here is their pinout:  
+- Power 1: OOS / AZ
+- Power 2: OOS / PA
+- Ground 6: AZ
+- Ground 9: AZ
 - Ground 14: AZ
-- Ground 20: PB / AZ
-- Ground 25: PB / AAS / AZ
-- Ground 30: PB / AZ
-- Ground 34: PB / AZ
-- Ground 39: PB / AAS / AZ
+- Ground 20: AZ
+- Ground 25: AZ / PA
+- Ground 30: AZ
+- Ground 34: AZ
+- Ground 39: AZ / PA
 
-![Pinout](https://github.com/pirateradiohack/PiRadio/blob/master/Pinout.png)
-![Pinout Legend](https://github.com/pirateradiohack/PiRadio/blob/master/Legend-Pinout.png)
+<img src="Pinout.png" alt="Transistor pins usage" width="600"/>
+<img src="Legend-Pinout.png" alt="Transistor pins usage legend" width="600"/>
 
 The first channel of the Raspio Analog Zero (channel 0) is expecting to receive a potentiometer to set the sound volume:
 plug the ends of the potentiometer to 3.3v and ground, then plug the wiper (usually found in the middle of the three tabs) into the first channel of the Analog Zero.

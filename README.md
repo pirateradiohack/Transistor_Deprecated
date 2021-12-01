@@ -28,23 +28,7 @@ If you find better hardware parts please [tell me](https://github.com/pirateradi
 - Put the SD card in your radio and turn it on.
 - Connect to the web interface. If you are lucky you can simply go to http://transistor.local and the interface will appear. If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor)
 
-
-Made from an old radio set:  
-The white button on top is the on / off switch, and the volume knob works:  
-![Transistor](pictures/Transistor.jpg)  
-Notice how the USB power plug fits nicely:  
-![Transistor_USB](pictures/Transistor_USB.jpg) ![Transistor_inside](pictures/Transistor_inside.jpg)
-
-Made from a cardboard box:  
-The white button on top is the on / off switch:  
-![Boombox](pictures/boombox.jpg)  
-Inside:  
-![Boombox inside](pictures/boombox_inside.jpg)
-
-Here is the interface:  
-![Transistor interface](pictures/Transistor_interface.png)
-
-Features:
+## Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)
 - Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`. They will appear in your media library.
 - **Bluetooth speaker** (connect to the device called Transistor)
@@ -53,8 +37,22 @@ Features:
 - Automatically restores the radio station that was playing and volume level after turning off / on.
 - **Sleep timer**: hold the on off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to add another 20 minutes. You can still simply press the on/off button to immediately turn off the radio.
 
-## How to get the image
+This one fits inside an old radio set, the white button on top is the on / off switch, and the volume knob works, Notice how the USB power plug fits nicely:  
+<img src="pictures/Transistor.jpg" alt="Transistor" width="200"/>
+<img src="pictures/Transistor_USB.jpg" alt="Transistor USB" width="300"/>
+<img src="pictures/Transistor_inside.jpg" alt="Transistor inside" width="300"/>
 
+Inside a cardboard box, the white button on top is the on / off switch:  
+<img src="pictures/boombox.jpg" alt="Boombox" width="400"/>
+<img src="pictures/boombox_inside.jpg" alt="Boombox inside" width="400"/>
+
+Here is the interface:  
+<img src="pictures/Transistor_interface.png" alt="Transistor interface" width="600"/>
+
+
+## Long setup
+
+### Getting the image
 ### Ready-to-write image
 For your convenience you will find the latest image pre-built. Access it from the [releases](https://github.com/pirateradiohack/Transistor/releases) page. Download and unzip the latest image, it's the zip file called "image" with a date. (It is built automatically from the source code by Travis-ci.)
 

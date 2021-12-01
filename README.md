@@ -143,8 +143,8 @@ Powers and grounds don't appear in the picture, here is their pinout:
 - Ground 34: AZ
 - Ground 39: AZ / PA
 
-<img src="Pinout.png" alt="Transistor pins usage" width="600"/>
-<img src="Legend-Pinout.png" alt="Transistor pins usage legend" width="600"/>
+<img src="Transistor_Pinout.png" alt="Transistor pins usage" width="700"/>
+<img src="Legend-Pinout.png" alt="Transistor pins usage legend" width="300"/>
 
 The first channel of the Raspio Analog Zero (channel 0) is expecting to receive a potentiometer to set the sound volume:
 plug the ends of the potentiometer to 3.3v and ground, then plug the wiper (usually found in the middle of the three tabs) into the first channel of the Analog Zero.

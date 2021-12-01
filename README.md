@@ -1,15 +1,24 @@
 # Transistor [![Build Status](https://api.travis-ci.com/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.com/github/pirateradiohack/Transistor)
 
-Transistor is a receiver for web radios. It takes the form of an image to be burnt onto an SD card. The image comprises an operating system and all the necessary software to stream internet radios on an embedded platform.  
+Build your own radio set and listen to web radios, podcasts, bluetooth and audio files.  
+Build it from anything you like, an old radio, a cardboard box, a 3d printed model or a toaster.
 
-The current hardware kit consists of the following:
-- A Raspberry Pi zero
-- A DAC / Audio Amplifier (tested with Phat Beat (not sold anymore) and [Audio Amp Shim](https://shop.pimoroni.com/products/audio-amp-shim-3w-mono-amp))
-- An On / Off switch ([OnOff Shim](https://shop.pimoroni.com/products/onoff-shim))
-- A power supply / battery charger ([Adafruit PowerBoost 1000C](https://shop.pimoroni.com/products/onoff-shim))
-- A LiPo battery
-- A Raspio Analog Zero (optional, if you want to plug a potentiometer for the volume setting)
-- Physical buttons for the Raspberry Pi GPIO
+All you need is to copy this software to a micro SD card and insert it in the following hardware:
+
+- [Raspberry Pi Zero W](https://shop.pimoroni.com/products/raspberry-pi-zero-w?variant=39458414297171)
+- Micro SD card (4GB should be enough if you don't want to store anything on it. If you want to store music or podcasts on your device then the bigger the better.)
+- [Pirate Audio 3W Stereo Amp](https://shop.pimoroni.com/products/pirate-audio-3w-stereo-amp)
+- A pair of [5W 4 Ohm 65mm Full Range Speaker](https://shop.pimoroni.com/products/5w-4-ohm-65mm-full-range-speaker)
+- [On / Off switch](https://shop.pimoroni.com/products/onoff-shim)
+- [Colourful Arcade Buttons](https://shop.pimoroni.com/products/colourful-arcade-buttons?variant=3030992879626) (For the On / Off switch)
+- [USB A to microB cable - Red – 10cm](https://shop.pimoroni.com/products/usb-a-to-microb-cable-red?variant=32065140554) (To connect the On / Off switch power micro USB to the battery charger.)
+- [Adafruit PowerBoost 1000 Charger - Rechargeable 5V Lipo USB Boost @ 1A - 1000C](https://shop.pimoroni.com/products/powerboost-1000-charger-rechargeable-5v-lipo-usb-boost-1a-1000c)
+- [LiPo Battery Pack – 2000mAh](https://shop.pimoroni.com/products/lipo-battery-pack?variant=20429082247) (more mAh means more autonomy, bigger is better but also more expensive)
+- [Right-angle Panel Mount Extension Cables (25cm) – USB micro-B](https://shop.pimoroni.com/products/right-angle-panel-mount-extension-cables-25cm?variant=32013609631827) (To connect to the battery charger and provide a power plug that goes outside the radio.)
+- [RasPiO Analog Zero](https://shop.pimoroni.com/products/raspio-analog-zero) (Optional. If you plug it, you will be able to use an old radio volume knob out of the box!)
+
+The provided software is guaranted to support the hardware listed here. But it is very probable that different hardware is also supported.
+If you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!
 
 Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)

@@ -20,6 +20,15 @@ All you need is to copy this software to a micro SD card and insert it in the fo
 The provided software is guaranted to support the hardware listed here. But it is very probable that different hardware is also supported.
 If you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!
 
+## Quick Setup
+
+- Download the [latest image](https://github.com/pirateradiohack/Transistor/releases/latest), that's the ZIP file named image. Unzip it.
+- Flash the image with [etcher](https://www.balena.io/etcher/).
+- Edit the file called `/etc/wpa_supplicant/wpa_supplicant.conf` and put your wifi name and password there.
+- Put the SD card in your radio and turn it on.
+- Connect to the web interface. If you are lucky you can simply go to http://transistor.local and the interface will appear. If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor)
+
+
 Made from an old radio set:  
 The white button on top is the on / off switch, and the volume knob works:  
 ![Transistor](pictures/Transistor.jpg)  
@@ -49,11 +58,10 @@ Features:
 ### Ready-to-write image
 For your convenience you will find the latest image pre-built. Access it from the [releases](https://github.com/pirateradiohack/Transistor/releases) page. Download and unzip the latest image, it's the zip file called "image" with a date. (It is built automatically from the source code by Travis-ci.)
 
-All you need to do is to configure your wifi on the image. You can also optionally configure your radio streams playlist.
+All you need to do is to configure your wifi on the image.
 
-The files to edit are:
+The file to edit:
 - wifi: `/etc/wpa_supplicant/wpa_supplicant.conf` (edit this file as root / sudo)
-- (optionally) playlist: `/home/pi/.config/vlc/playlist.m3u` (create this file)
 
 You can edit the files *before* or *after* writing the image to the sd card:
 - before: you can mount the `.img`.  
@@ -107,11 +115,8 @@ You can use any `mpd` client you like (a non exhaustive list of applications for
 The image is built with the official RaspberryPi.org tool (https://github.com/RPi-Distro/pi-gen) to build a Raspbian lite system with all the software needed
 to have a working internet radio stream client. It uses `mpd`.
 
-## Motivation
-I wanted to have a software that was easy to install on an embedded kit to make an Internet radio receiver.
-
 ## Developers
-The interesting bits happen in the `stage2/04-pirate-radio` directory. Where files can be added and then instructions can be set for the building tool to create the final OS image.
+The most interesting bits happen in the `stage2/04-pirate-radio` directory. Where files can be added and then instructions can be set for the building tool to create the final OS image.
 
 If you want to test the image locally, without the need to burn it to an SD card, you can use QEMU to emulate the hardware on your system and then create a virtual machine.
 - Make sure you have QEMU installed for the arm architecture, you can test with `qemu-system-arm --version`.

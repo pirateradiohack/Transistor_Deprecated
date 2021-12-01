@@ -20,11 +20,20 @@ All you need is to copy this software to a micro SD card and insert it in the fo
 The provided software is guaranted to support the hardware listed here. But it is very probable that different hardware is also supported.
 If you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!
 
-Examples:  
+Made from an old radio set:  
 The white button on top is the on / off switch, and the volume knob works:  
 ![Transistor](pictures/Transistor.jpg)  
 Notice how the USB power plug fits nicely:  
 ![Transistor_USB](pictures/Transistor_USB.jpg) ![Transistor_inside](pictures/Transistor_inside.jpg)
+
+Made from a cardboard box:  
+The white button on top is the on / off switch:  
+![Boombox](pictures/boombox.jpg)  
+Inside:  
+![Boombox inside](pictures/boombox_inside.jpg)
+
+Here is the interface:  
+![Transistor interface](pictures/Transistor_interface.png)
 
 Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)

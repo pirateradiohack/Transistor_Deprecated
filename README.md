@@ -21,11 +21,10 @@ The provided software is guaranted to support the hardware listed here. But it i
 If you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!
 
 Examples:  
-The white button on top is the on / off switch, and the volume knob works:
+The white button on top is the on / off switch, and the volume knob works:  
 ![Transistor](pictures/Transistor.jpg)  
 Notice how the USB power plug fits nicely:  
-![Transistor_USB](pictures/Transistor_USB.jpg)
-![Transistor_inside](pictures/Transistor_inside.jpg)
+![Transistor_USB](pictures/Transistor_USB.jpg) ![Transistor_inside](pictures/Transistor_inside.jpg)
 
 Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)

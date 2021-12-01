@@ -20,6 +20,13 @@ All you need is to copy this software to a micro SD card and insert it in the fo
 The provided software is guaranted to support the hardware listed here. But it is very probable that different hardware is also supported.
 If you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!
 
+Examples:  
+The white button on top is the on / off switch, and the volume knob works:
+![Transistor](pictures/Transistor.jpg)  
+Notice how the USB power plug fits nicely:  
+![Transistor_USB](pictures/Transistor_USB.jpg)
+![Transistor_inside](pictures/Transistor_inside.jpg)
+
 Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)
 - Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`. They will appear in your media library.

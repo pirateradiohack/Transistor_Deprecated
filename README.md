@@ -50,7 +50,7 @@ Here is the interface:
 <img src="pictures/Transistor_interface.png" alt="Transistor interface" width="600"/>
 
 
-## Long setup
+## Detailed setup
 
 ### Getting the image
 ### Ready-to-write image

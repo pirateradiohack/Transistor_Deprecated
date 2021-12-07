@@ -1,5 +1,8 @@
+"""Helper functions for the controllers."""
 from contextlib import contextmanager
 from functools import wraps
+
+import netifaces
 
 import pulsectl
 import simpleaudio as sa
@@ -55,3 +58,25 @@ def connection_to_pulseaudio():
         yield {"client": pulse_client, "sink": pulse_sink}
     finally:
         pulse_client.close()
+
+
+def local_ip_address() -> str:
+    """Return local IP address."""
+    ip_address = netifaces.ifaddresses('wlan0')
+    ip_address = ip_address[netifaces.AF_INET]
+    ip_address = ip_address[0].get('addr')
+    return ip_address
+
+
+def playing(self, content: str) -> str:
+    """Fetch the currently playing content.
+
+    Available content is:
+    - name
+    - album
+    - artist
+    - title
+    """
+    with connection_to_mpd() as mpd:
+        playing = mpd.currentsong()
+    return playing.get(content)

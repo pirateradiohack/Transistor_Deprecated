@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 from ST7789 import ST7789
 
 from controls import Controls
+from helpers import local_ip_address, playing
 
 BG_COLOR = (255, 255, 0)
 TEXT_COLOR = (0, 0, 0)
@@ -33,21 +34,18 @@ class Display:
         self.font = ImageFont.truetype(
             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30
         )
+        self.current_stream = ""
+        self.metadata_queue = asyncio.Queue()  # type: asyncio.Queue
 
-    async def metadata_display(self) -> None:
+    async def screen_display(self) -> None:
         """
-        Takes the currently playing metadata from MPD and displays
-        it on the screen."""
+        Listens to the various display queues and displays their
+        messages on the screen.
+        """
         text_x = self.display.width
         time_start = time.time()
         while True:
-            name = controls.playing("name")
-            title = controls.playing("title")
-            text = ""
-            if name:
-                text += name + ' // '
-            if title:
-                text += title
+            text = self.current_stream
             x = (time.time() - time_start) * SCROLL_SPEED
             size_x, size_y = self.draw.textsize(text, self.font)
             x %= size_x + self.display.width
@@ -60,3 +58,18 @@ class Display:
             )
             self.display.display(self.image)
             await asyncio.sleep(0.1)
+
+    async def current_stream_display(self) -> None:
+        """
+        Update the currently playing display from MPD.
+        """
+        while True:
+            name = playing("name")
+            title = playing("title")
+            text = ""
+            if name:
+                text += name + " // "
+            if title:
+                text += title
+            self.current_stream = text
+            await asyncio.sleep(1)

@@ -3,7 +3,6 @@ physical interaction devices (buttons, LEDs...) and the controls of the
 radio.
 """
 import asyncio
-from signal import pause
 
 import systemd.daemon
 from gpiozero import Button
@@ -43,12 +42,9 @@ on_off_button.when_released = controls.shutdown
 async def main():
     await asyncio.gather(
         controls.volume_knob(),
-        display.metadata_display()
+        display.current_stream_display(),
+        display.screen_display(),
     )
 
 
 asyncio.run(main())
-
-# maintain the module loaded for as long the the interface is needed
-# without consuming resources
-pause()

@@ -4,15 +4,18 @@ from subprocess import run
 
 from gpiozero import MCP3008, Button
 
-from helpers import notify, connection_to_mpd, connection_to_pulseaudio
+from helpers import (
+    connection_to_mpd,
+    connection_to_pulseaudio,
+    notify,
+)
 
 VOLUME_STEP = 0.05
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 
 
 class Controls:
-    """Implements the various controls needed in an audio device.
-    """
+    """Implements the various controls needed in an audio device."""
 
     def __init__(self) -> None:
         self.button_was_held: bool = False
@@ -21,18 +24,12 @@ class Controls:
     def volume_down(self) -> None:
         """Volume down button tells pulseaudio to step down the volume."""
         with connection_to_pulseaudio() as pulse:
-            pulse["client"].volume_change_all_chans(
-                pulse["sink"],
-                -VOLUME_STEP
-            )
+            pulse["client"].volume_change_all_chans(pulse["sink"], -VOLUME_STEP)
 
     def volume_up(self) -> None:
         """Volume up button tells pulseaudio to step up the volume."""
         with connection_to_pulseaudio() as pulse:
-            pulse["client"].volume_change_all_chans(
-                pulse["sink"],
-                +VOLUME_STEP
-            )
+            pulse["client"].volume_change_all_chans(pulse["sink"], +VOLUME_STEP)
 
     async def volume_knob(self) -> None:
         """
@@ -98,19 +95,6 @@ class Controls:
         """Play previous track."""
         with connection_to_mpd() as mpd:
             mpd.previous()
-
-    def playing(self, content: str) -> str:
-        """Fetch the currently playing content.
-
-        Available content is:
-        - name
-        - album
-        - artist
-        - title
-        """
-        with connection_to_mpd() as mpd:
-            playing = mpd.currentsong()
-        return playing.get(content)
 
     @notify
     def sleep_timer(self) -> None:

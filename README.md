@@ -26,12 +26,14 @@ If you find better hardware parts please [tell me](https://github.com/pirateradi
 - Flash the image with [etcher](https://www.balena.io/etcher/).
 - Edit the file called `/etc/wpa_supplicant/wpa_supplicant.conf` and put your wifi name and password there.
 - Put the SD card in your radio and turn it on.
-- Connect to the web interface. If you are lucky you can simply go to http://transistor.local and the interface will appear. If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor)
+- Connect to the web interface. If you use the recommended hardware then you have a screen: just hold the play / pause button and you will see the IP address of the Transistor appear on its screen. Copy that to your browser. If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor)
+- From the interface, add a radio to listen to by going to `Add Radio` in the menu.
+- Enjoy.
 
 ## Features:
 - Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)
-- Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`. They will appear in your media library.
 - **Bluetooth speaker** (connect to the device called Transistor)
+- Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`. They will appear in your media library.
 - Play your **podcasts** (connect via `ssh` and use the command `poca-subscribe add` to add a new podcast subscription. You will see your podcasts appear in your media library. They are updated every hour, use the command `poca` to update them manually.)
 - **Various interfaces** to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
 - Automatically restores the radio station that was playing and volume level after turning off / on.
@@ -97,6 +99,7 @@ Transistor is equipped with the necessary buttons to turn it on / off, control t
 Transistor connects to the wifi network that was set in the config file. It should receive an IP address from the Internet router. You need to find this IP address in order to control the Transistor. There are several ways you can do that:
 
 - For convinience, Transistor sets its own local domain. Some devices are compatible with this (Android supposedly works, but iOS does not. Linux should be fine if avahi is installed). So you can try to reach your Transistor at the address `transistor.local`.
+- You can see the IP address of your Transistor directly on its screen when you hold the play / pause button.
 - The command `nmap 192.168.1.0/24` can list the devices on your network (adapt the network address based on your computer's IP address, most probably the `1` could be another number). You will see a device named `transistor.local` along with its IP address.
 - Or you could also check your Internet router to get the list of connected devices and their corresponding IP addresses.
 

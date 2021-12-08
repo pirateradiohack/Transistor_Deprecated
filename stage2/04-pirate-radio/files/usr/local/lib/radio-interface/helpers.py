@@ -68,7 +68,7 @@ def local_ip_address() -> str:
     return ip_address
 
 
-def playing(self, content: str) -> str:
+def playing(content: str) -> str:
     """Fetch the currently playing content.
 
     Available content is:

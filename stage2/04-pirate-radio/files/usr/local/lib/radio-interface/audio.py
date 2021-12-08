@@ -1,24 +1,23 @@
-"""The class that implements the controls for the audio device."""
+"""The class that implements the controller for the audio device."""
 import asyncio
-from subprocess import run
 
 from gpiozero import MCP3008, Button
 
 from helpers import (
     connection_to_mpd,
     connection_to_pulseaudio,
-    notify,
 )
 
 VOLUME_STEP = 0.05
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 
 
-class Controls:
+class Audio:
     """Implements the various controls needed in an audio device."""
 
+    play_pause_button_was_held: bool = False
+
     def __init__(self) -> None:
-        self.button_was_held: bool = False
         self.potentiometer_volume = MCP3008(0)
 
     def volume_down(self) -> None:
@@ -63,9 +62,14 @@ class Controls:
             await asyncio.sleep(0.1)
 
     def play(self) -> None:
-        """Play the audio."""
+        """Start audio playback."""
         with connection_to_mpd() as mpd:
             mpd.play()
+
+    def stop(self) -> None:
+        """Stop audio playback."""
+        with connection_to_mpd() as mpd:
+            mpd.stop()
 
     def repeat(self, state: bool) -> None:
         """Select repeat mode for the playlist.
@@ -83,8 +87,10 @@ class Controls:
 
     def play_pause(self) -> None:
         """Toggle play/pause."""
-        with connection_to_mpd() as mpd:
-            mpd.pause()
+        if not Audio.play_pause_button_was_held:
+            with connection_to_mpd() as mpd:
+                mpd.pause()
+        Audio.play_pause_button_was_held = False
 
     def next(self) -> None:
         """Play next track."""
@@ -95,35 +101,3 @@ class Controls:
         """Play previous track."""
         with connection_to_mpd() as mpd:
             mpd.previous()
-
-    @notify
-    def sleep_timer(self) -> None:
-        """Shutdown button tells the system to shutdown 20 minutes from now."""
-        # use the trick described here:
-        # https://gpiozero.readthedocs.io/en/stable/faq.html
-        # #how-do-i-use-button-when-pressed-and-button-when-held-together
-        self.button_was_held = True
-        command = """shutdown
-                   -h +20
-                   """
-        run(command.split())
-        command = """wall
-                   -n Sleep timer was triggered. System is shutting down in 20
-                   minutes.
-                   """
-        run(command.split())
-
-    def shutdown(self, button) -> None:
-        """Shutdown button tells the system to shutdown now."""
-        if not self.button_was_held:
-            with connection_to_mpd() as mpd:
-                mpd.stop()
-            command = """shutdown
-                    -h now
-                    """
-            run(command.split())
-            command = """wall
-                        -n Power off was triggered by user.
-                       """
-            run(command.split())
-        self.button_was_held = False

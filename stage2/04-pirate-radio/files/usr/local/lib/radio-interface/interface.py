@@ -7,15 +7,17 @@ import asyncio
 import systemd.daemon
 from gpiozero import Button
 
-from controls import Controls
+from audio import Audio
 from display import Display
+from system import System
 
-controls = Controls()
+audio = Audio()
 display = Display()
+system = System()
 
 # Make sure the client is playing and in repeat mode on startup
-controls.play()
-controls.repeat(True)
+audio.play()
+audio.repeat(True)
 
 # all initialization is considered done after this point and we tell
 # systemd that we are ready to serve
@@ -23,27 +25,28 @@ systemd.daemon.notify("READY=1")
 
 # Assign the buttons to their corresponding GPIOs
 fast_forward_button = Button(5)
-rewind_button = Button(13)
 play_pause_button = Button(6)
 volume_up_button = Button(16)
 volume_down_button = Button(24)
 on_off_button = Button(17)
+rewind_button = Button(13)
 
 # Define what actions to set for each button event
-fast_forward_button.when_pressed = controls.next
-rewind_button.when_pressed = controls.previous
-play_pause_button.when_pressed = controls.play_pause
-volume_up_button.when_pressed = controls.volume_up
-volume_down_button.when_pressed = controls.volume_down
-on_off_button.when_held = controls.sleep_timer
-on_off_button.when_released = controls.shutdown
+fast_forward_button.when_pressed = audio.next
+rewind_button.when_pressed = audio.previous
+play_pause_button.when_released = audio.play_pause
+play_pause_button.when_held = display.ip_address
+volume_up_button.when_pressed = audio.volume_up
+volume_down_button.when_pressed = audio.volume_down
+on_off_button.when_released = system.shutdown
+on_off_button.when_held = system.sleep_timer
 
 
 async def main():
     await asyncio.gather(
-        controls.volume_knob(),
-        display.current_stream_display(),
-        display.screen_display(),
+        audio.volume_knob(),
+        display.current_stream(),
+        display.screen(),
     )
 
 

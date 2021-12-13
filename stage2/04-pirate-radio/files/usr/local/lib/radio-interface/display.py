@@ -75,7 +75,6 @@ class Display:
                 self.current_display = text
             await asyncio.sleep(1)
 
-    @notify
     def ip_address(self) -> None:
         """
         Display the local IP address on screen.

@@ -20,6 +20,11 @@ class Audio:
     def __init__(self) -> None:
         self.potentiometer_volume = MCP3008(0)
 
+    def set_volume(self, amount: int) -> None:
+        """Set audio volume amount in percent."""
+        with connection_to_pulseaudio() as pulse:
+            pulse['client'].volume_set_all_chans(pulse['sink'], amount / 100)
+
     def volume_down(self) -> None:
         """Volume down button tells pulseaudio to step down the volume."""
         with connection_to_pulseaudio() as pulse:

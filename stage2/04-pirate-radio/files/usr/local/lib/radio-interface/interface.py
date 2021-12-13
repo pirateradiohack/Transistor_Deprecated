@@ -15,6 +15,10 @@ audio = Audio()
 display = Display()
 system = System()
 
+# Set the audio volume to a reasonable amount for the first boot
+if system.first_boot():
+    audio.set_volume(35)
+
 # Make sure the client is playing and in repeat mode on startup
 audio.play()
 audio.repeat(True)

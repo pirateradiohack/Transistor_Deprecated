@@ -9,6 +9,8 @@ install -v -m 644 files/etc/systemd/system/pulseaudio.service		"${ROOTFS_DIR}/et
 install -v -m 644 files/etc/pulse/client.conf				"${ROOTFS_DIR}/etc/pulse/"
 install -v -m 644 files/etc/pulse/default.pa				"${ROOTFS_DIR}/etc/pulse/"
 
+install -v -m 644 files/transistor_first_boot 				"${ROOTFS_DIR}/transistor_first_boot"
+
 # mpd
 git clone https://github.com/Mic92/python-mpd2.git			"${ROOTFS_DIR}/root/python-mpd2"
 install -v -m 644 files/etc/mpd.conf					"${ROOTFS_DIR}/etc/"

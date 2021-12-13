@@ -1,9 +1,9 @@
 """ Controller for system actions."""
+import os
 from subprocess import run
 
-from helpers import notify
-
 from audio import Audio
+from helpers import notify
 
 audio = Audio()
 
@@ -44,3 +44,12 @@ class System:
                        """
             run(command.split())
         self.power_button_was_held = False
+
+    def first_boot(self) -> bool:
+        """Return True if the system is booted for the first time.
+        False otherwise.
+        """
+        if os.path.exists("/transistor_first_boot"):
+            os.remove("/transistor_first_boot")
+            return True
+        return False

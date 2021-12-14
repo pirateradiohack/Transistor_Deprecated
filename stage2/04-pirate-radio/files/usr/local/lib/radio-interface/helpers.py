@@ -3,7 +3,6 @@ from contextlib import contextmanager
 from functools import wraps
 
 import netifaces
-
 import pulsectl
 import simpleaudio as sa
 from mpd import MPDClient
@@ -43,7 +42,7 @@ def connection_to_mpd():
 
 
 @contextmanager
-def connection_to_pulseaudio():
+def connection_to_pulseaudio(max_volume):
     """Context manager to establish a connection with Pulse Audio.
 
     Should be used each time getting the volume is necessary since the
@@ -51,20 +50,25 @@ def connection_to_pulseaudio():
     client.
     That is necessary for instance when changing the volume as the current
     volume is needed in order to apply a change.
+
+    We also make sure we don't go above the maximum audio volume
+    threshold set in the audio module.
     """
     try:
         pulse_client = pulsectl.Pulse("radio-interface")
         pulse_sink = pulse_client.sink_list()[0]
         yield {"client": pulse_client, "sink": pulse_sink}
     finally:
+        if pulse_client.volume_get_all_chans(pulse_sink) > max_volume:
+            pulse_client.volume_set_all_chans(pulse_sink, max_volume)
         pulse_client.close()
 
 
 def local_ip_address() -> str:
     """Return local IP address."""
-    ip_address = netifaces.ifaddresses('wlan0')
+    ip_address = netifaces.ifaddresses("wlan0")
     ip_address = ip_address[netifaces.AF_INET]
-    ip_address = ip_address[0].get('addr')
+    ip_address = ip_address[0].get("addr")
     return ip_address
 
 

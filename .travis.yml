@@ -11,7 +11,7 @@ before_script:
 - cp config.example config
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:
-- "./build-docker.sh"
+- travis_wait 45 ./build-docker.sh
 deploy:
   provider: releases
   api_key:

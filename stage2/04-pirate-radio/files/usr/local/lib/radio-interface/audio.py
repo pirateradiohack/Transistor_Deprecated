@@ -9,6 +9,7 @@ from helpers import (
 )
 
 VOLUME_STEP = 0.05
+MAX_VOLUME = 1.2
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 
 

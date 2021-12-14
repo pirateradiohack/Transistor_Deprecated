@@ -9,6 +9,7 @@ from helpers import (
 )
 
 VOLUME_STEP = 0.05
+MAX_VOLUME = 0.75
 POTENTIOMETER_THRESHOLD_TRIGGER = 0.01
 
 
@@ -22,17 +23,17 @@ class Audio:
 
     def set_volume(self, amount: int) -> None:
         """Set audio volume amount in percent."""
-        with connection_to_pulseaudio() as pulse:
+        with connection_to_pulseaudio(MAX_VOLUME) as pulse:
             pulse['client'].volume_set_all_chans(pulse['sink'], amount / 100)
 
     def volume_down(self) -> None:
         """Volume down button tells pulseaudio to step down the volume."""
-        with connection_to_pulseaudio() as pulse:
+        with connection_to_pulseaudio(MAX_VOLUME) as pulse:
             pulse["client"].volume_change_all_chans(pulse["sink"], -VOLUME_STEP)
 
     def volume_up(self) -> None:
         """Volume up button tells pulseaudio to step up the volume."""
-        with connection_to_pulseaudio() as pulse:
+        with connection_to_pulseaudio(MAX_VOLUME) as pulse:
             pulse["client"].volume_change_all_chans(pulse["sink"], +VOLUME_STEP)
 
     async def volume_knob(self) -> None:
@@ -61,7 +62,7 @@ class Audio:
             )
             if knob_movement:
                 volume = self.potentiometer_volume.value
-                with connection_to_pulseaudio() as pulse:
+                with connection_to_pulseaudio(MAX_VOLUME) as pulse:
                     pulse["client"].volume_set_all_chans(pulse["sink"], volume)
             comparison_point = self.potentiometer_volume.value
             await asyncio.sleep(0.1)

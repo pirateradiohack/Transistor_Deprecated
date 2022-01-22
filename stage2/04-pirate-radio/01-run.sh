@@ -9,14 +9,11 @@ install -v -m 644 files/etc/systemd/system/pulseaudio.service		"${ROOTFS_DIR}/et
 install -v -m 644 files/etc/pulse/client.conf				"${ROOTFS_DIR}/etc/pulse/"
 install -v -m 644 files/etc/pulse/default.pa				"${ROOTFS_DIR}/etc/pulse/"
 
+# pulseaudio first boot volume
 install -v -m 644 files/transistor_first_boot 				"${ROOTFS_DIR}/transistor_first_boot"
 
 # mpd
-git clone https://github.com/Mic92/python-mpd2.git			"${ROOTFS_DIR}/root/python-mpd2"
 install -v -m 644 files/etc/mpd.conf					"${ROOTFS_DIR}/etc/"
-if [ -f ../../my-playlist.m3u ]; then
-	install -v -m 644 ../../my-playlist.m3u				"${ROOTFS_DIR}/var/lib/mpd/playlists/my-playlist.m3u"
-fi
 
 # physical interface (aka buttons)
 install -v -m 644 files/etc/systemd/system/radio-interface.service	"${ROOTFS_DIR}/etc/systemd/system/"
@@ -41,6 +38,12 @@ mkdir "${ROOTFS_DIR}/usr/local/lib/radio-browser/"
 install -v -m 644 files/usr/local/lib/radio-browser/radio-browser.py 	"${ROOTFS_DIR}/usr/local/lib/radio-browser/"
 install -v -m 644 files/etc/systemd/system/radio-browser.service 	"${ROOTFS_DIR}/etc/systemd/system/"
 
+# radio settings interface
+mkdir "${ROOTFS_DIR}/usr/local/lib/radio-settings/"
+cp -r files/usr/local/lib/radio-settings/* 				"${ROOTFS_DIR}/usr/local/lib/radio-settings/"
+install -v -m 644 files/etc/systemd/system/radio-settings.service 	"${ROOTFS_DIR}/etc/systemd/system/"
+install -v -m 644 files/etc/systemd/system/podcasts-updater.service 	"${ROOTFS_DIR}/etc/systemd/system/"
+
 # bluetooth
 install -v -m 644 files/etc/bluetooth/main.conf				"${ROOTFS_DIR}/etc/bluetooth/"
 install -v -m 644 files/etc/systemd/system/bluetooth-agent.service	"${ROOTFS_DIR}/etc/systemd/system/"
@@ -49,8 +52,3 @@ install -v -m 644 files/usr/local/sbin/bluetooth-agent/bluezutils.py	"${ROOTFS_D
 install -v -m 755 files/usr/local/sbin/bluetooth-agent/simple-agent	"${ROOTFS_DIR}/usr/local/sbin/bluetooth-agent/"
 install -v -m 644 files/etc/systemd/system/bluetooth-discovery.service	"${ROOTFS_DIR}/etc/systemd/system/"
 install -v -m 755 files/usr/local/sbin/bt-discovery			"${ROOTFS_DIR}/usr/local/sbin/"
-
-# poca
-mkdir "${ROOTFS_DIR}/home/transistor/.poca/"
-install -v -m 644 files/poca.xml					"${ROOTFS_DIR}/home/transistor/.poca/"
-install -v -m 600 files/var/spool/cron/crontabs/transistor		"${ROOTFS_DIR}/var/spool/cron/crontabs/"

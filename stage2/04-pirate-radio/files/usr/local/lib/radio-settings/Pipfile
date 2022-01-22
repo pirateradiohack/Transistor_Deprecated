@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django-apscheduler = "==0.6.0"
+feedparser = "==6.0.8"
+python-dateutil = "==2.8.2"
+Django = "==3.2.6"
+requests = "==2.26.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

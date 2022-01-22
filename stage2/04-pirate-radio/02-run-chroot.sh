@@ -8,10 +8,9 @@ pip3 install --upgrade pip setuptools
 pip3 install pulsectl
 
 # mpd
-mkdir -p /home/transistor/audio_library/{music,podcasts}
-chown -R transistor:transistor /home/transistor/audio_library/
-cd /root/python-mpd2
-python3 setup.py install
+mkdir -p /home/transistor/podcasts
+chown -R transistor:transistor /home/transistor/podcasts
+pip3 install python-mpd2
 
 # physical interface
 useradd -r -s /bin/false radio-interface
@@ -39,11 +38,15 @@ pip3 install st7789
 pip3 install pyradios
 systemctl enable radio-browser
 
+# Podcasts
+pip3 install -r /usr/local/lib/radio-settings/requirements.txt
+systemctl enable podcasts-updater
+
+# Radio settings interface
+cd /usr/local/lib/radio-settings
+python3 manage.py makemigrations && python3 manage.py migrate
+systemctl enable radio-settings
+
 # bluetooth
 systemctl enable bluetooth-agent
 systemctl enable bluetooth-discovery
-
-# podcasts
-pip3 install poca
-chown transistor:crontab /var/spool/cron/crontabs/transistor
-chown -R transistor:transistor /home/transistor/.poca/

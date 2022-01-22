@@ -10,3 +10,4 @@ SKIP_IMAGES
 *-pc
 apt-cacher-ng/
 my-playlist.m3u
+db.sqlite3

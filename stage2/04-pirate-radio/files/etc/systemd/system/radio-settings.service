@@ -1,0 +1,15 @@
+[Unit]
+Description=http service to serve radio settings to users
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/lib/radio-settings
+ExecStart=/usr/bin/python3 manage.py runserver 0.0.0.0:8000
+# Disable Python's buffering of STDOUT and STDERR, so that output from the
+# service shows up immediately in systemd's logs
+Environment=PYTHONUNBUFFERED=1
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=default.target

@@ -38,6 +38,9 @@ If you find better hardware parts please [tell me](https://github.com/pirateradi
 - Automatically restores the radio station that was playing and volume level after turning off / on.
 - **Sleep timer**: hold the on / off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to add another 20 minutes. You can still simply press the on/off button to immediately turn off the radio.
 
+Here is the interface:  
+<img src="pictures/Transistor_interface.png" alt="Transistor interface" width="600"/>
+
 This one fits inside an old radio set, the white button on top is the on / off switch, and the volume knob works, Notice how the USB power plug fits nicely:  
 <img src="pictures/Transistor.jpg" alt="Transistor" width="200"/>
 <img src="pictures/Transistor_USB.jpg" alt="Transistor USB" width="300"/>
@@ -46,9 +49,6 @@ This one fits inside an old radio set, the white button on top is the on / off s
 Inside a cardboard box, the white button on top is the on / off switch:  
 <img src="pictures/boombox.jpg" alt="Boombox" width="400"/>
 <img src="pictures/boombox_inside.jpg" alt="Boombox inside" width="400"/>
-
-Here is the interface:  
-<img src="pictures/Transistor_interface.png" alt="Transistor interface" width="600"/>
 
 
 ## Detailed setup

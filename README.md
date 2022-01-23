@@ -1,6 +1,6 @@
 # Transistor [![Build Status](https://api.travis-ci.com/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.com/github/pirateradiohack/Transistor)
 
-Build your own radio set and listen to web radios, podcasts, bluetooth and audio files.  
+Build your own radio set and listen to web radios, podcasts and bluetooth.  
 Build it from anything you like, an old radio, a cardboard box, a 3d printed model or a toaster.
 
 All you need is to copy this software to a micro SD card and insert it in the following hardware:
@@ -24,20 +24,19 @@ If you find better hardware parts please [tell me](https://github.com/pirateradi
 
 - Download the [latest image](https://github.com/pirateradiohack/Transistor/releases/latest), that's the ZIP file named image. Unzip it.
 - Flash the image with [etcher](https://www.balena.io/etcher/).
-- Edit the file called `/etc/wpa_supplicant/wpa_supplicant.conf` and put your wifi name and password there.
-- Put the SD card in your radio and turn it on.
-- Connect to the web interface. If you use the recommended hardware then you have a screen: just hold the play / pause button and you will see the IP address of the Transistor appear on its screen. Copy that to your browser. If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor)
+- Edit the file called `/etc/wpa_supplicant/wpa_supplicant.conf` and add your wifi name and password there.
+- Install the SD card in your radio and turn it on. (note that the first time it takes some time, be patient)
+- Connect to the web interface. If you use the recommended hardware then you have a screen: just hold the play / pause button and you will see the IP address of the Transistor appear on its screen. Copy that to your browser. (If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor))
 - From the interface, add a radio to listen to by going to `Add Radio` in the menu.
 - Enjoy.
 
 ## Features:
-- Play **web radios** (from within the web interface, just enter the name of the radio and it will be added automatically! (thanks to radio-browser.info). Optionally you can add an http radio stream directly, or as a playlist.)
-- **Bluetooth speaker** (connect to the device called Transistor)
-- Play your **audio files** by uploading them to `/home/transistor/audio_library/music/` via `scp`. They will appear in your media library.
-- Play your **podcasts** (connect via `ssh` and use the command `poca-subscribe add` to add a new podcast subscription. You will see your podcasts appear in your media library. They are updated every hour, use the command `poca` to update them manually.)
+- Play **web radios**: from the web interface, click the +Radio button and enter the name of the radio. Wait a bit, it will be added automatically to your list! (thanks to radio-browser.info). Optionally you can add an http radio stream directly with the +Stream button.
+- Play your **podcasts**: from the web interface, click the +Podcast button to go to the podcasts settings where you can subscribe and manage your podcasts. Podcasts are then updated every 30 minutes. Only the latest number of episodes you specify will be kept on your device and appear in the Podcasts section automatically. (Do note that it takes time to download the episodes. Try to subscribe gently and allow some time before subscribing to other podcasts.)
+- **Bluetooth speaker**: simply connect to the device called Transistor from your phone or computer and use it as a bluetooth speaker.
 - **Various interfaces** to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
 - Automatically restores the radio station that was playing and volume level after turning off / on.
-- **Sleep timer**: hold the on off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to add another 20 minutes. You can still simply press the on/off button to immediately turn off the radio.
+- **Sleep timer**: hold the on / off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to add another 20 minutes. You can still simply press the on/off button to immediately turn off the radio.
 
 This one fits inside an old radio set, the white button on top is the on / off switch, and the volume knob works, Notice how the USB power plug fits nicely:  
 <img src="pictures/Transistor.jpg" alt="Transistor" width="200"/>

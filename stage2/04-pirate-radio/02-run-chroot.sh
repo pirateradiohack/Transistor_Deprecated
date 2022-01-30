@@ -50,3 +50,16 @@ systemctl enable radio-settings
 # bluetooth
 systemctl enable bluetooth-agent
 systemctl enable bluetooth-discovery
+
+# wifi
+systemctl disable dhcpcd rsyslog avahi-daemon
+apt --autoremove -y purge ifupdown dhcpcd5 isc-dhcp-client isc-dhcp-common rsyslog avahi-daemon
+rm -r /etc/network /etc/dhcp
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+apt-mark hold avahi-daemon dhcpcd dhcpcd5 ifupdown isc-dhcp-client isc-dhcp-common libnss-mdns openresolv raspberrypi-net-mods rsyslog
+systemctl enable systemd-networkd.service systemd-resolved.service
+systemctl enable accesspoint@wlan0.service
+rfkill unblock wlan
+systemctl disable wpa_supplicant.service
+rm -rf /etc/wpa_supplicant/wpa_supplicant.conf
+systemctl enable wpa_supplicant@wlan0.service

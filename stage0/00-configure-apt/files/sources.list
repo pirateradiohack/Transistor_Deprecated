@@ -1,4 +1,4 @@
 deb http://raspbian.raspberrypi.org/raspbian/ RELEASE main contrib non-free rpi
 # Uncomment line below then 'apt-get update' to enable 'apt-get source'
 #deb-src http://raspbian.raspberrypi.org/raspbian/ RELEASE main contrib non-free rpi
-#deb http://mirror.nl.leaseweb.net/raspbian/raspbian/ RELEASE main contrib non-free rpi
+#deb http://mirrors.ircam.fr/pub/raspbian/raspbian/ RELEASE main contrib non-free rpi

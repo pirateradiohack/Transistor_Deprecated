@@ -52,3 +52,12 @@ install -v -m 644 files/usr/local/sbin/bluetooth-agent/bluezutils.py	"${ROOTFS_D
 install -v -m 755 files/usr/local/sbin/bluetooth-agent/simple-agent	"${ROOTFS_DIR}/usr/local/sbin/bluetooth-agent/"
 install -v -m 644 files/etc/systemd/system/bluetooth-discovery.service	"${ROOTFS_DIR}/etc/systemd/system/"
 install -v -m 755 files/usr/local/sbin/bt-discovery			"${ROOTFS_DIR}/usr/local/sbin/"
+
+# wifi setup
+install -v -m 600 files/etc/hostapd/hostapd.conf 			"${ROOTFS_DIR}/etc/hostapd/"
+install -v -m 644 files/etc/systemd/system/accesspoint@.service		"${ROOTFS_DIR}/etc/systemd/system/"
+install -v -m 644 files/etc/wpa_supplicant/wpa_supplicant-wlan0.conf 	"${ROOTFS_DIR}/etc/wpa_supplicant/"
+mkdir "${ROOTFS_DIR}/etc/systemd/system/wpa_supplicant@wlan0.service.d/"
+install -v -m 644 files/etc/systemd/system/wpa_supplicant@wlan0.service.d/override.conf "${ROOTFS_DIR}/etc/systemd/system/wpa_supplicant@wlan0.service.d/"
+install -v -m 644 files/etc/systemd/network/08-wifi.network 		"${ROOTFS_DIR}/etc/systemd/network/"
+install -v -m 644 files/etc/systemd/network/12-ap.network 		"${ROOTFS_DIR}/etc/systemd/network/"

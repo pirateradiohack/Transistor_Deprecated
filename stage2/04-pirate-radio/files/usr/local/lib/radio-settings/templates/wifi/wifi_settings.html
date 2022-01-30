@@ -1,0 +1,10 @@
+<h1>Enter your wifi name and password here:</h1>
+<p>(only 2.4Ghz wifi, 5Ghz is not supported yet)
+<form action = "" method = "post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="OK">
+</form>
+Press OK and your Transistor will soon appear on your wifi network (be patient!).<br>
+Press and hold the play / pause button and you will see its IP address appear on its screen.<br>
+Copy that IP address in your browser to see your Transistor interface.

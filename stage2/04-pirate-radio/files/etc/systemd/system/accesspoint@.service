@@ -1,0 +1,10 @@
+[Unit]
+Description=accesspoint with hostapd (interface-specific version)
+
+[Service]
+ExecStartPre=/sbin/iw dev %i interface add ap@%i type __ap
+ExecStart=/usr/sbin/hostapd -i ap@%i /etc/hostapd/hostapd.conf
+ExecStopPost=-/sbin/iw dev ap@%i del
+
+[Install]
+WantedBy=sys-subsystem-net-devices-%i.device

@@ -1,4 +1,5 @@
 deb http://archive.raspberrypi.org/debian/ RELEASE main
 # Uncomment line below then 'apt-get update' to enable 'apt-get source'
 #deb-src http://archive.raspberrypi.org/debian/ RELEASE main
-# deb [trusted=yes] http://archive.raspberrypi.org/debian/ RELEASE main
+#deb [trusted=yes] http://archive.raspberrypi.org/debian/ RELEASE main
+#deb [trusted=yes] http://mirrors.ircam.fr/pub/debian/ RELEASE main

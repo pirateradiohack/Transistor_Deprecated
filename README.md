@@ -24,10 +24,10 @@ If you find better hardware parts please [tell me](https://github.com/pirateradi
 
 - Download the [latest image](https://github.com/pirateradiohack/Transistor/releases/latest), that's the ZIP file named image. Unzip it.
 - Flash the image with [etcher](https://www.balena.io/etcher/).
-- Edit the file called `/etc/wpa_supplicant/wpa_supplicant.conf` and add your wifi name and password there.
-- Install the SD card in your radio and turn it on. (note that the first time it takes some time, be patient)
-- Connect to the web interface. If you use the recommended hardware then you have a screen: just hold the play / pause button and you will see the IP address of the Transistor appear on its screen. Copy that to your browser. (If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor))
-- From the interface, add a radio to listen to by going to `Add Radio` in the menu.
+- Install the SD card in your radio and turn it on. (note that the first boot takes some time, be patient)
+- You will see a new wifi access point called `Transistor`: connect to it (the password is `Transistor`). In your browser, open http://192.168.179.1:8000/wifi_settings (it can take some time to load, be patient) and enter your home wifi name and password there. Press OK, your Transistor will reboot and connect to your wifi.
+- Connect to the web interface: hold the play / pause button and you will see the IP address of the Transistor appear on its screen. Copy that to your browser. (If that does not work on your device then read [Controlling your Transistor](#controlling-your-transistor))
+- From the interface, add a radio to listen to by going to `+Radio` in the menu.
 - Enjoy.
 
 ## Features:
@@ -57,11 +57,11 @@ Inside a cardboard box, the white button on top is the on / off switch:
 ### Ready-to-write image
 For your convenience you will find the latest image pre-built. Access it from the [releases](https://github.com/pirateradiohack/Transistor/releases) page. Download and unzip the latest image, it's the zip file called "image" with a date. (It is built automatically from the source code by Travis-ci.)
 
-All you need to do is to configure your wifi on the image.
 
-The file to edit:
-- wifi: `/etc/wpa_supplicant/wpa_supplicant.conf` (edit this file as root / sudo)
+In case you would like to set your wifi manually, the file to edit is:
+`/etc/wpa_supplicant/wpa_supplicant-wlan0.conf` (edit this file as root / sudo)
 
+Your operating system needs to be able to mount `ext4` (linux) partitions.
 You can edit the files *before* or *after* writing the image to the sd card:
 - before: you can mount the `.img`.  
 With a modern operating system you probably just have to click the .img.  
@@ -73,7 +73,6 @@ You are safe to flash the image.
 ### building from source
 - First clone this repository with `git clone https://github.com/pirateradiohack/Transistor.git`.  
 - Configure your wifi settings: copy the file called `config.example` to `config` and edit this last one. You will see where to enter your wifi name, password and country. All 3 settings are necessary. Your changes to this file will be kept in future updates.
-- Optionally configure your radio stations: If you create a file called `my-playlist.m3u` with your own list of internet radio streams, it will be installed.
 If not, then you can always add stations in the web interface.
 - Then build the image. (You can see the whole guide on the official RaspberryPi repo: https://github.com/RPi-Distro/pi-gen). I find it easier to use docker (obviously you need to have docker installed on your system) as there is nothing else to install, just run one command from this directory: `./build-docker.sh`. That's it. On my computer it takes between 15 and 30 minutes. And at the end you should see something like: `Done! Your image(s) should be in deploy/`  
 If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.  

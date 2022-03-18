@@ -12,4 +12,4 @@ FIRST_USER_NAME="transistor"
 FIRST_USER_PASS="transistor"
 
 # set to 1 to enable SSH
-ENABLE_SSH="1"
+ENABLE_SSH="0"

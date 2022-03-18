@@ -28,12 +28,12 @@ audio.repeat(True)
 systemd.daemon.notify("READY=1")
 
 # Assign the buttons to their corresponding GPIOs
-fast_forward_button = Button(5)
+fast_forward_button = Button(26)
+rewind_button = Button(5)
 play_pause_button = Button(6)
 volume_up_button = Button(16)
 volume_down_button = Button(24)
 on_off_button = Button(17)
-rewind_button = Button(13)
 
 # Define what actions to set for each button event
 fast_forward_button.when_pressed = audio.next

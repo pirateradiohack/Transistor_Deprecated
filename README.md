@@ -150,5 +150,15 @@ Powers and grounds don't appear in the picture, here is their pinout:
 The first channel of the Raspio Analog Zero (channel 0) is expecting to receive a potentiometer to set the sound volume:
 plug the ends of the potentiometer to 3.3v and ground, then plug the wiper (usually found in the middle of the three tabs) into the first channel of the Analog Zero.
 
+These are the instructions to generate the image of the pins layout:
+- cd to pinout directory
+- edit `src/en/overlay/transistor.md`
+- `docker build -t pinout.xyz .`
+- `docker run -p 5000:5000 -e PINOUT_LANG=en pinout.xyz`
+- in browser open `http://localhost:5000/pinout/transistor`
+- `docker stop container_name`
+- `docker rm container_name`
+- `docker rmi pinout.xyz`
+
 ## Contribution
 Issues and pull requests are welcome.

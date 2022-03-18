@@ -1,24 +1,27 @@
 # Transistor [![Build Status](https://api.travis-ci.com/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.com/github/pirateradiohack/Transistor)
 
-Build your own radio set and listen to web radios, podcasts and bluetooth.  
-Build it from anything you like, an old radio, a cardboard box, a 3d printed model or a toaster.
+Build your own radio set and listen to **web radios**, **podcasts** and **bluetooth**.  
 
-All you need is to copy this software to a micro SD card and insert it in the following hardware:
+There is a 3D printed case included with files to print it yourself. But you can build the case with anything you like, an old radio, a cardboard box or a toaster.
+
+All you need to do is copy this software to a micro SD card and insert it in the following hardware:
 
 - [Raspberry Pi Zero W](https://shop.pimoroni.com/products/raspberry-pi-zero-w?variant=39458414297171)
 - Micro SD card (4GB should be enough if you don't want to store anything on it. If you want to store music or podcasts on your device then the bigger the better.)
 - [Pirate Audio 3W Stereo Amp](https://shop.pimoroni.com/products/pirate-audio-3w-stereo-amp)
 - A pair of [5W 4 Ohm 65mm Full Range Speaker](https://shop.pimoroni.com/products/5w-4-ohm-65mm-full-range-speaker)
 - [On / Off switch](https://shop.pimoroni.com/products/onoff-shim)
-- [Colourful Arcade Buttons](https://shop.pimoroni.com/products/colourful-arcade-buttons?variant=3030992879626) (For the On / Off switch)
+- [Colourful Arcade Buttons](https://shop.pimoroni.com/products/colourful-arcade-buttons?variant=3030992879626) (For the Big Next Button(TM) )
+- [Tactile Switch Buttons](https://shop.pimoroni.com/products/tactile-switch-buttons-6mm-slim-x-20-pack?variant=31479866785875) (For the power button)
 - [USB A to microB cable - Red – 10cm](https://shop.pimoroni.com/products/usb-a-to-microb-cable-red?variant=32065140554) (To connect the On / Off switch power micro USB to the battery charger.)
 - [Adafruit PowerBoost 1000 Charger - Rechargeable 5V Lipo USB Boost @ 1A - 1000C](https://shop.pimoroni.com/products/powerboost-1000-charger-rechargeable-5v-lipo-usb-boost-1a-1000c)
 - [LiPo Battery Pack – 2000mAh](https://shop.pimoroni.com/products/lipo-battery-pack?variant=20429082247) (more mAh means more autonomy, bigger is better but also more expensive)
 - [Right-angle Panel Mount Extension Cables (25cm) – USB micro-B](https://shop.pimoroni.com/products/right-angle-panel-mount-extension-cables-25cm?variant=32013609631827) (To connect to the battery charger and provide a power plug that goes outside the radio.)
-- [RasPiO Analog Zero](https://shop.pimoroni.com/products/raspio-analog-zero) (Optional. If you plug it, you will be able to use an old radio volume knob out of the box!)
+- [optional] [RasPiO Analog Zero](https://shop.pimoroni.com/products/raspio-analog-zero) (Optional. If you plug it, you will be able to use an old radio volume knob out of the box!)
 
-The provided software is guaranted to support the hardware listed here. But it is very probable that different hardware is also supported.
-If you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!
+(if you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!)
+
+Once you have all the components, assemble them and get ready to put them inside the case after you flash the SD card:
 
 ## Quick Setup
 
@@ -30,26 +33,38 @@ If you find better hardware parts please [tell me](https://github.com/pirateradi
 - From the interface, add a radio to listen to by going to `+Radio` in the menu.
 - Enjoy.
 
-## Features:
-- Play **web radios**: from the web interface, click the +Radio button and enter the name of the radio. Wait a bit, it will be added automatically to your list! (thanks to radio-browser.info). Optionally you can add an http radio stream directly with the +Stream button.
-- Play your **podcasts**: from the web interface, click the +Podcast button to go to the podcasts settings where you can subscribe and manage your podcasts. Podcasts are then updated every 30 minutes. Only the latest number of episodes you specify will be kept on your device and appear in the Podcasts section automatically. (Do note that it takes time to download the episodes. Try to subscribe gently and allow some time before subscribing to other podcasts.)
-- **Bluetooth speaker**: simply connect to the device called Transistor from your phone or computer and use it as a bluetooth speaker.
-- **Various interfaces** to control the radio: physical buttons, web interface, command line interface and phone / desktop applications
-- Automatically restores the radio station that was playing and volume level after turning off / on.
-- **Sleep timer**: hold the on / off button until your hear the confirmation sound (1 second) and the radio will turn off 20 minutes later. Hold it again to add another 20 minutes. You can still simply press the on/off button to immediately turn off the radio.
+## Features Description:
 
-Here is the interface:  
+#### * Play **web radios**:
+From the web interface, click the **+Radio** button and enter the name of the radio. Wait a bit, it will be added automatically to your list! (thanks to radio-browser.info). (Optionally you can add an http radio stream directly with the +Stream button.)
+
+#### * Play your **podcasts**:
+From the web interface, click the **+Podcast** button to go to the podcasts settings where you can subscribe and manage your podcasts. Podcasts are then updated every 30 minutes. Only the latest number of episodes you specify will be kept on your device and appear in the Podcasts section automatically. (Do note that it takes time to download the episodes. Try to subscribe gently and allow some time before subscribing to other podcasts.)
+
+#### * **Bluetooth speaker**:
+Simply connect to the bluetooth speaker called **Transistor** from your phone or computer.
+#### * **Sleep timer**:
+
+When you hold the on / off button for 1 second your Transistor will turn off 20 minutes later. If you feel the need, you can hold it again to add another 20 minutes and so on, until you fall asleep. (You can still simply press the on/off button to immediately turn off your Transistor.)
+
+#### * **The BiG NexT ButtoN (TM)**:
+A big, very satisfying to hit, arcade style button that skips to the next radio. Feels Good.
+
+## Images:
+
+The 3D printed case:  
+<img src="pictures/Transistor-3D.jpg" alt=" Transistor 3D printed case." width="600"/>  
+STL files for 3D printer:  
+- [Case](https://github.com/pirateradiohack/Transistor/blob/master/Transistor5.stl)  
+- [Back Cover](https://github.com/pirateradiohack/Transistor/blob/master/Transistor5-cover.stl)
+
+You will need to adapt the battery compartment to fit you own battery.
+
+Inside:  
+<img src="pictures/Transistor-inside.jpg" alt=" Transistor 3D printed case inside." width="600"/>
+
+The web interface:  
 <img src="pictures/Transistor_interface.png" alt="Transistor interface" width="600"/>
-
-This one fits inside an old radio set, the white button on top is the on / off switch, and the volume knob works, Notice how the USB power plug fits nicely:  
-<img src="pictures/Transistor.jpg" alt="Transistor" width="200"/>
-<img src="pictures/Transistor_USB.jpg" alt="Transistor USB" width="300"/>
-<img src="pictures/Transistor_inside.jpg" alt="Transistor inside" width="300"/>
-
-Inside a cardboard box, the white button on top is the on / off switch:  
-<img src="pictures/boombox.jpg" alt="Boombox" width="400"/>
-<img src="pictures/boombox_inside.jpg" alt="Boombox inside" width="400"/>
-
 
 ## Detailed setup
 

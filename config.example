@@ -1,15 +1,9 @@
 # set the image name
 IMG_NAME="Transistor"
 
-# If build breaks uncomment this
-# USE_QCOW2="0"
-
-# set to 1 to zip the image
-DEPLOY_ZIP="1"
-
 # system user (changing this will break)
 FIRST_USER_NAME="transistor"
 FIRST_USER_PASS="transistor"
 
 # set to 1 to enable SSH
-ENABLE_SSH="0"
+ENABLE_SSH="1"

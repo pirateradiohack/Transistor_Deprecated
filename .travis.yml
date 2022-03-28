@@ -7,8 +7,9 @@ before_script:
     exit
   fi
 - cp config.example config
+- sudo apt-get -y install quilt qemu-user-static debootstrap libarchive-tools qemu-utils kpartx pigz
 script:
-- "sudo apt install quilt qemu-user-static debootstrap libarchive-tools qemu-utils kpartx pigz && ./build.sh"
+- "sudo ./build.sh"
 deploy:
   provider: releases
   api_key:

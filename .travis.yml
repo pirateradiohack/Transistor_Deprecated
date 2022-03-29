@@ -10,6 +10,7 @@ before_script:
   fi
 - cp config.example config
 - sudo apt-get -y install qemu-user-static binfmt-support
+- modprobe binfmt_misc
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:
 - "./build-docker.sh"

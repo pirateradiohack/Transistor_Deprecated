@@ -1,4 +1,6 @@
 language: shell
+services:
+- docker
 before_script:
 - |
   if ! git describe --exact-match --tags HEAD &> /dev/null
@@ -7,16 +9,10 @@ before_script:
     exit
   fi
 - cp config.example config
-- sudo apt-get -y install quilt
 - sudo apt-get -y install qemu-user-static
-- sudo apt-get -y install debootstrap
-- sudo apt-get -y install qemu-utils
-- sudo apt-get -y install kpartx
-- sudo apt-get -y install pigz
-- sudo apt-get -y install libarchive13=3.2.1-2~ubuntu16.04.1
-- sudo apt-get -y install libarchive-tools
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:
-- "sudo ./build.sh"
+- "./build-docker.sh"
 deploy:
   provider: releases
   api_key:
@@ -26,3 +22,7 @@ deploy:
     all_branches: true
     tags: true
   file: deploy/image_`date +"%Y-%m-%d"`-Transistor-lite.zip
+env:
+  global:
+  - secure: i+FXYnykjOSIR8pF1lnjjykUu4EoLnCUmq3A8rAv33G1uhF3yI+CCpglXgZacV7/sz6l2h56ydy9TQEk1Iijve067zo/FRRxD5wkP0DCZxAUb1ZPBNf2L80fCK7hK4f0t1JwTQ4DEerjN6CQ2hH9793ir62bXZXY+YxUsx/HYTyP3OA1ObFtqk3pQLOl6V764L7qLbRAdoWmD6bjHW1XT2XbURivQebIHHcRhy1ycwPKVCqI+XYUEr2R9OnMqZJ6oVVChQPpiqtZKUfHXabbJc7D8FL/0pFtVU1wRvBeK/t1E0if2WLp8sH+fbkOCyze+yBy2P/fpAKsWhzk/48xVQFicGmE0Y+s8XoexSSkr7OQAQjiVzfoN/C8Y2inB0gDiE9ws7cqi0zscHlz6FauCEYAy7lMqWDa/RkRkzsZ2oNn1w06WIdDmU62qW/W3GYxELtaJF6PTljThCh2jQEQq3OxmDSqCagaD1amAZ4qSxYDN3wPnub7TgxaMazQqbIukIUKJ4mZ07C+FSvicau97frOZGAKoGSv9t4mDSP/NCO9zFLFAkyZQ52YMSVaBfQ8F/2nbTDLvQ9xT/vGC7KRW9ZLaUIOlI9XmjmaEhfZLqYfnlOQNKPOB7Y7f4MiVSc4/HkcDyT56yWlK86oM1UnZzMVtrGxWGSaCNPyxDTTp7k=
+  - secure: Jc2e8VoLbOycoS1IXfUj2xceHEtmBRm+GCAn8SzPvDfVpmQ6EcDeYyS1Fv61daaqr07vMm+bmPO9KPGW/8Spobx4ZJY/ttAlP8BWuhknc5TNkv5cfosbEdgS3w4mBZw9pn2IOrXqN8RrxiHe1TMmDtj+Zok5klvX///aL6RiHazoY2GnQSzmp+lxrhQjpVoia+PXbHuH8Ei10Zn4Wc0FWPLtJSsJjbzh5/ypIq14EnyWiDOTpMxcbx8tOcdCdIArV8OIWEsBjsmcGT6dzJys9+m6jisQw4p5od6HcroUQKZTLNLwKCD6RQo7D+5r/bY+AWu+HeRPanqDARDeS/3M/6WGCMMVz93QA4g8S8UpmR6Syib93DDBgR5j7v/t/mXaFmsJt8An9NELRvV5E6IMpF2Y+W3s/Xup8wW3Eog8ZN5Y/ZwI5UCyx7EbuaHrDnPbs/z88T0Idy7Ejo0wdrKXw9qeHeFP1RLNaysj4z+Q7iuV1DUTXshX571LGAdW2ulpm6Q1Uk87qE2+XtVO/FAb0H+/n0JQRv/ryIATlP+zAD9iBygCuRHZbSexp6iHQe97ELBJZBBBAsp32RgBgalKMnbN50cVF3QRlnZ8IVypApwXdlgS/+d6zR46YsJ2HwBR7BkVs2jOvvNouOW7J6I+29SFlJBzr7gtkxGUX5DVLr4=

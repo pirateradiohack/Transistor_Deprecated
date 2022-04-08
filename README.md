@@ -2,9 +2,12 @@
 
 Build your own radio set and listen to **web radios**, **podcasts** and **bluetooth**.  
 
-There is a 3D printed case included with files to print it yourself. But you can build the case with anything you like, an old radio, a cardboard box or a toaster.
+<img src="pictures/Transistor-3D.jpg" alt=" Transistor 3D printed case." width="600"/>  
 
-All you need to do is copy this software to a micro SD card and insert it in the following hardware:
+&#127468;&#127463; [Quick Setup + User Manual](https://raw.githubusercontent.com/pirateradiohack/Transistor/master/Quick_Setup_Guide%2BUser_Manual.pdf)  
+&#127467;&#127479; [Manuel de mise en route et d'utilisation](https://raw.githubusercontent.com/pirateradiohack/Transistor/master/Mise-en-route-rapide%2Bmanuel-utilisation.pdf)
+
+All you need to do is copy [the image](https://github.com/pirateradiohack/Transistor/releases/latest) to a micro SD card and insert it in the following hardware:
 
 - [Raspberry Pi Zero W](https://shop.pimoroni.com/products/raspberry-pi-zero-w?variant=39458414297171)
 - Micro SD card (4GB should be enough if you don't want to store anything on it. If you want to store music or podcasts on your device then the bigger the better.)
@@ -21,7 +24,14 @@ All you need to do is copy this software to a micro SD card and insert it in the
 
 (if you find better hardware parts please [tell me](https://github.com/pirateradiohack/Transistor/issues/new/choose)!)
 
-Once you have all the components, assemble them and get ready to put them inside the case after you flash the SD card:
+Get the components, assemble them together and build the case with a 3D printer:
+
+- [Case](https://github.com/pirateradiohack/Transistor/blob/master/Transistor5.stl)  
+- [Back Cover](https://github.com/pirateradiohack/Transistor/blob/master/Transistor5-cover.stl)
+
+(You will need to adapt the battery compartment to fit you own battery.)
+
+Alternatively you could use your own case, or an old radio, or a cardboard box, or a wooden box, or a toaster...
 
 ## Quick Setup
 
@@ -51,14 +61,6 @@ When you hold the on / off button for 1 second your Transistor will turn off 20 
 A big, very satisfying to hit, arcade style button that skips to the next radio. Feels Good.
 
 ## Images:
-
-The 3D printed case:  
-<img src="pictures/Transistor-3D.jpg" alt=" Transistor 3D printed case." width="600"/>  
-STL files for 3D printer:  
-- [Case](https://github.com/pirateradiohack/Transistor/blob/master/Transistor5.stl)  
-- [Back Cover](https://github.com/pirateradiohack/Transistor/blob/master/Transistor5-cover.stl)
-
-You will need to adapt the battery compartment to fit you own battery.
 
 Inside:  
 <img src="pictures/Transistor-inside.jpg" alt=" Transistor 3D printed case inside." width="600"/>

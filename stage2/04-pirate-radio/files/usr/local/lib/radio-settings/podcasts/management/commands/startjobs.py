@@ -13,51 +13,58 @@ from podcasts.models import Episode, Feed
 logger = logging.getLogger(__name__)
 
 
-def save_new_episodes(feed):
-    """Saves new episodes to the database.
+def get_new_episodes():
+    """Saves new episodes in all feeds to the database.
 
-    Checks the episode GUID against the episodes currently stored in the
+    Checks the episode's URL against the episodes currently stored in the
     database. If not found, then a new `Episode` is added to the database.
 
-    Args:
-        feed: requires a Feed object
+    When an episode is saved in the model, its corresponding audio file is
+    downloaded and its path is stored in the database for use in further
+    deletion.
+
+    We save only episodes with audio enclosures.
     """
-    channel = feedparser.parse(feed.url)
-    feed.save()
-    entries = channel.entries[: feed.max_entries]
-    for item in entries:
-        if not Episode.objects.filter(link=item.link).exists():
-            enclosures = item.enclosures
-            audio = ""
-            for enclosure in enclosures:
-                if "audio" in enclosure.get("type"):
-                    audio = enclosure.get("href")
-            episode = Episode(
-                title=item.title,
-                pub_date=parser.parse(item.published),
-                link=item.link,
-                feed=feed,
-                audio=audio,
-            )
-            episode.save()
-
-
-def trim_old_episodes(feed):
-    """Remove old episodes from a feed."""
-    entries = Episode.objects.filter(feed=feed).order_by("-pub_date")
-    if len(entries) > feed.max_entries:
-        keep = entries[: feed.max_entries]
-        Episode.objects.filter(feed=feed).exclude(
-            pk__in=[item.id for item in keep]
-        ).delete()
-
-
-def update_feeds():
-    """Update all feeds to their latest episodes."""
     feeds = Feed.objects.all()
     for feed in feeds:
-        save_new_episodes(feed)
-        trim_old_episodes(feed)
+        feed.save()  # update feed metadata in model
+        episodes = feedparser.parse(feed.url).entries
+        episodes = [episode for episode in episodes if
+                    _is_audio_episode(episode)]
+        episodes = episodes[: feed.max_entries]
+        for episode in episodes:
+            if not Episode.objects.filter(link=episode.link).exists():
+                audio = ""
+                for enclosure in episode.enclosures:
+                    if "audio" in enclosure.get("type"):
+                        audio = enclosure.get("href")
+                episode_in_db = Episode(
+                    title=episode.title,
+                    pub_date=parser.parse(episode.published),
+                    link=episode.link,
+                    feed=feed,
+                    audio=audio,
+                )
+                episode_in_db.save()
+
+
+def _is_audio_episode(episode):
+    """Return True when at least one of the enclosures is of type audio."""
+    audio_enclosures = [enclosure for enclosure in episode.enclosures if
+                        "audio" in enclosure.get("type")]
+    return audio_enclosures != []
+
+
+def trim_old_episodes():
+    """Remove old episodes from a feed."""
+    feeds = Feed.objects.all()
+    for feed in feeds:
+        episodes = Episode.objects.filter(feed=feed).order_by("-pub_date")
+        if len(episodes) > feed.max_entries:
+            keep = episodes[: feed.max_entries]
+            Episode.objects.filter(feed=feed).exclude(
+                pk__in=[item.id for item in keep]
+            ).delete()
 
 
 def delete_old_job_executions(max_age=604_800):
@@ -84,14 +91,24 @@ class Command(BaseCommand):
         logger.info("Added weekly job: Delete Old Job Executions.")
 
         scheduler.add_job(
-            update_feeds,
+            get_new_episodes,
             trigger="interval",
             minutes=30,
-            id="feed updater",
+            id="episode updater",
             max_instances=1,
             replace_existing=True,
         )
-        logger.info("Added job: Feed Updater.")
+        logger.info("Added job: Episode Updater.")
+
+        scheduler.add_job(
+            trim_old_episodes,
+            trigger="interval",
+            minutes=90,
+            id="episode deleter",
+            max_instances=1,
+            replace_existing=True,
+        )
+        logger.info("Added job: Episode Deleter.")
 
         try:
             logger.info("Starting scheduler...")

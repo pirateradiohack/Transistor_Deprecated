@@ -11,3 +11,4 @@ SKIP_IMAGES
 apt-cacher-ng/
 my-playlist.m3u
 db.sqlite3
+.vagrant

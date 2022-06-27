@@ -83,16 +83,21 @@ You can edit the files *before* or *after* writing the image to the sd card:
 - before: you can mount the `.img`.  
 With a modern operating system you probably just have to click the .img.  
 With Linux you can use `kpartx` (from the `multipath-tools` package) to be able to mount the partition directly: `sudo kpartx -a path/to/2019-05-23-Transistor-lite.img` followed by `sudo mount /dev/mapper/loop0p2 tmp/ -o loop,rw`  
-(you will need to create the mount directory first and check what loop device you are using with `sudo kpartx -l path/to/2019-05-23-Transistor-lite.img`). Then you can edit the files mentionned above. And `sudo umount tmp`.  
+(you will need to create the mount directory first and check what loop device you are using with `sudo kpartx -l path/to/2019-05-23-Transistor-lite.img`). Then you can edit the files mentioned above. And `sudo umount tmp`.  
 You are safe to flash the image.
 - after: your operating system probably automounts the partitions.
 
 ### building from source
 - First clone this repository with `git clone https://github.com/pirateradiohack/Transistor.git`.  
-- Configure your wifi settings: copy the file called `config.example` to `config` and edit this last one. You will see where to enter your wifi name, password and country. All 3 settings are necessary. Your changes to this file will be kept in future updates.
-If not, then you can always add stations in the web interface.
 - Then build the image. (You can see the whole guide on the official RaspberryPi repo: https://github.com/RPi-Distro/pi-gen). I find it easier to use docker (obviously you need to have docker installed on your system) as there is nothing else to install, just run one command from this directory: `./build-docker.sh`. That's it. On my computer it takes between 15 and 30 minutes. And at the end you should see something like: `Done! Your image(s) should be in deploy/`  
 If you don't see that, it's probably that the build failed. It happens to me sometimes for no reason and I find that just re-launching the build with `CONTINUE=1 ./build-docker.sh` finishes the build correctly.  
+- On some systems even Docker fails to build the image. In this case you can fallback to Vagrant. It will
+create a virtual machine with a supported OS to build the image.
+You will need to install both Vagrant and VirtualBox. The vagrantfile at the root of this repository will
+install Debian Buster as recommend by [pi-gen](https://github.com/RPi-Distro/pi-gen). It will also share
+the repository inside the VM at /pigen. It means you just need to issue those commands:
+`vagrant up` then `vagrant ssh --command 'sudo /pigen/build.sh'` and finally `vagrant halt`.
+If everything goes well you will find your image in the `deploy` folder.
 - You should find the newly created image in the `deploy` directory.
 
 ## Write the image to a SD card

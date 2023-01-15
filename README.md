@@ -1,5 +1,19 @@
 # Transistor [![Build Status](https://api.travis-ci.com/pirateradiohack/Transistor.svg?branch=master)](https://travis-ci.com/github/pirateradiohack/Transistor)
 
+----------------------------------------------------------
+## Deprecation status
+
+This version is for the Raspberry Pi Zero W **version 1 only**.  
+It was the first version of the Transistor software.  
+It is not maintained any more but **should work** as described here.  
+You can download it here: https://github.com/pirateradiohack/Transistor/releases/download/2022-04-10-Fix_Podcasts_Update-SSH/image_2022-04-10-Transistor-lite.zip
+
+Development efforts are being made in the new repository (https://github.com/pirateradiohack/Transistor) to support the Raspberry Pi Zero W version 2, and if possible also the version 1.
+
+This repository will be kept in its current state.
+
+----------------------------------------------------------
+
 Build your own radio set and listen to **web radios**, **podcasts** and **bluetooth**.  
 
 <img src="pictures/Transistor-3D.jpg" alt=" Transistor 3D printed case." width="600"/>  
